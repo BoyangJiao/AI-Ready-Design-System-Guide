@@ -17,7 +17,7 @@ const workflowSteps = [
     step: 1,
     title: "设计阶段准备",
     icon: Figma,
-    color: "violet",
+    accentColor: "var(--washi-accent-vermillion)",
     tasks: [
       "语义化命名所有图层和组件",
       "全面应用 Auto Layout",
@@ -32,7 +32,7 @@ const workflowSteps = [
     step: 2,
     title: "编写 Skills 文件",
     icon: Code,
-    color: "amber",
+    accentColor: "var(--washi-accent-ochre)",
     tasks: [
       "定义组件使用规范（属性、约束）",
       "提供代码模板和示例",
@@ -47,7 +47,7 @@ const workflowSteps = [
     step: 3,
     title: "MCP 连接配置",
     icon: Cpu,
-    color: "indigo",
+    accentColor: "var(--washi-accent-indigo)",
     tasks: [
       "安装并配置 Figma MCP 插件",
       "在 Cursor/Claude 中启用 MCP 协议",
@@ -62,7 +62,7 @@ const workflowSteps = [
     step: 4,
     title: "AI 代码生成",
     icon: Code,
-    color: "emerald",
+    accentColor: "var(--washi-accent-bamboo)",
     tasks: [
       "选择目标组件或页面",
       "通过 MCP 将设计数据传递给 AI",
@@ -121,14 +121,26 @@ export function WorkflowSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-100 text-emerald-700 text-[12px] mb-4" style={{ fontWeight: 500 }}>
+          <div
+            className="inline-flex items-center gap-2 px-3 py-1.5 text-[12px] mb-4"
+            style={{
+              fontWeight: 500,
+              backgroundColor: "var(--washi-accent-bamboo-light)",
+              color: "var(--washi-accent-bamboo)",
+              border: "1px solid var(--washi-accent-bamboo)",
+              borderRadius: "var(--washi-radius)",
+            }}
+          >
             <Play size={13} />
             工作流实战
           </div>
-          <h2 className="text-3xl sm:text-4xl tracking-tight mb-3" style={{ fontWeight: 700, lineHeight: 1.2 }}>
+          <h2
+            className="text-3xl sm:text-4xl tracking-tight mb-3 font-serif"
+            style={{ fontWeight: 700, lineHeight: 1.2, color: "var(--washi-ink)" }}
+          >
             Figma → MCP → AI 编程工具
           </h2>
-          <p className="text-gray-500 text-[15px] max-w-2xl mb-12" style={{ lineHeight: 1.7 }}>
+          <p className="text-[15px] max-w-2xl mb-12" style={{ lineHeight: 1.7, color: "var(--washi-ink-light)" }}>
             完整的 4 步工作流程，从设计阶段准备到最终的 AI 代码生成。每一步都有详细的操作清单和最佳实践。
           </p>
         </motion.div>
@@ -147,22 +159,26 @@ export function WorkflowSection() {
               <button
                 key={step.step}
                 onClick={() => setActiveStep(i)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-[13px] transition-all whitespace-nowrap ${
-                  activeStep === i
-                    ? `bg-${step.color}-100 text-${step.color}-700`
-                    : "bg-gray-100 text-gray-500"
-                }`}
-                style={{ fontWeight: activeStep === i ? 500 : 400 }}
+                className="flex items-center gap-2 px-4 py-2.5 text-[13px] transition-all whitespace-nowrap"
+                style={{
+                  fontWeight: activeStep === i ? 500 : 400,
+                  backgroundColor: activeStep === i ? "var(--washi-paper)" : "transparent",
+                  color: activeStep === i ? "var(--washi-ink)" : "var(--washi-ink-light)",
+                  border: activeStep === i ? "1px solid var(--washi-border-dark)" : "1px solid transparent",
+                  borderRadius: "var(--washi-radius)",
+                }}
               >
                 <div
-                  className={`w-6 h-6 rounded-full flex items-center justify-center text-[11px] ${
-                    completedSteps.has(i)
-                      ? "bg-emerald-500 text-white"
+                  className="w-6 h-6 rounded-full flex items-center justify-center text-[11px]"
+                  style={{
+                    fontWeight: 600,
+                    backgroundColor: completedSteps.has(i)
+                      ? "var(--washi-accent-bamboo)"
                       : activeStep === i
-                      ? "bg-gray-800 text-white"
-                      : "bg-gray-300 text-white"
-                  }`}
-                  style={{ fontWeight: 600 }}
+                      ? "var(--washi-ink)"
+                      : "var(--washi-border-dark)",
+                    color: "var(--washi-paper)",
+                  }}
                 >
                   {completedSteps.has(i) ? <Check size={12} /> : step.step}
                 </div>
@@ -177,27 +193,34 @@ export function WorkflowSection() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="bg-white border border-gray-200/60 rounded-2xl p-6"
+              className="p-6"
+              style={{
+                backgroundColor: "var(--washi-paper)",
+                border: "1px solid var(--washi-border)",
+                borderRadius: "var(--washi-radius)",
+              }}
             >
               <div className="flex items-start justify-between mb-6">
                 <div>
-                  <h3 className="text-[18px] mb-1" style={{ fontWeight: 600 }}>
+                  <h3 className="text-[18px] mb-1 font-serif" style={{ fontWeight: 600, color: "var(--washi-ink)" }}>
                     Step {workflowSteps[activeStep].step}: {workflowSteps[activeStep].title}
                   </h3>
-                  <div className="text-[13px] text-gray-400">
+                  <div className="text-[13px]" style={{ color: "var(--washi-ink-faint)" }}>
                     {workflowSteps[activeStep].tasks.length} 项任务
                   </div>
                 </div>
                 <button
                   onClick={() => toggleStep(activeStep)}
-                  className={`px-4 py-2 rounded-lg text-[13px] transition-all ${
-                    completedSteps.has(activeStep)
-                      ? "bg-emerald-100 text-emerald-700"
-                      : "bg-gray-100 text-gray-600"
-                  }`}
-                  style={{ fontWeight: 500 }}
+                  className="px-4 py-2 text-[13px] transition-all"
+                  style={{
+                    fontWeight: 500,
+                    backgroundColor: completedSteps.has(activeStep) ? "var(--washi-accent-bamboo-light)" : "var(--washi-bg-warm)",
+                    color: completedSteps.has(activeStep) ? "var(--washi-accent-bamboo)" : "var(--washi-ink-light)",
+                    border: completedSteps.has(activeStep) ? "1px solid var(--washi-accent-bamboo)" : "1px solid var(--washi-border)",
+                    borderRadius: "var(--washi-radius)",
+                  }}
                 >
-                  {completedSteps.has(activeStep) ? "✓ 已完成" : "标记完成"}
+                  {completedSteps.has(activeStep) ? "已完成" : "标记完成"}
                 </button>
               </div>
 
@@ -205,23 +228,34 @@ export function WorkflowSection() {
                 {workflowSteps[activeStep].tasks.map((task, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-2 bg-gray-50 rounded-xl px-4 py-3"
+                    className="flex items-start gap-2 px-4 py-3"
+                    style={{
+                      backgroundColor: "var(--washi-bg-warm)",
+                      borderRadius: "var(--washi-radius)",
+                    }}
                   >
-                    <ChevronRight size={14} className="text-gray-400 mt-0.5 shrink-0" />
-                    <span className="text-[13px] text-gray-600" style={{ lineHeight: 1.5 }}>
+                    <ChevronRight size={14} style={{ color: "var(--washi-ink-faint)" }} className="mt-0.5 shrink-0" />
+                    <span className="text-[13px]" style={{ lineHeight: 1.5, color: "var(--washi-ink-light)" }}>
                       {task}
                     </span>
                   </div>
                 ))}
               </div>
 
-              <div className="bg-amber-50 border border-amber-200/50 rounded-xl p-4 flex items-start gap-3">
-                <AlertTriangle size={16} className="text-amber-500 mt-0.5 shrink-0" />
+              <div
+                className="p-4 flex items-start gap-3"
+                style={{
+                  backgroundColor: "var(--washi-accent-ochre-light)",
+                  border: "1px solid var(--washi-accent-ochre)",
+                  borderRadius: "var(--washi-radius)",
+                }}
+              >
+                <AlertTriangle size={16} style={{ color: "var(--washi-accent-ochre)" }} className="mt-0.5 shrink-0" />
                 <div>
-                  <div className="text-[12px] text-amber-600 mb-1" style={{ fontWeight: 600 }}>
+                  <div className="text-[12px] mb-1" style={{ fontWeight: 600, color: "var(--washi-accent-ochre)" }}>
                     Pro Tip
                   </div>
-                  <p className="text-[13px] text-amber-700/70" style={{ lineHeight: 1.6 }}>
+                  <p className="text-[13px]" style={{ lineHeight: 1.6, color: "var(--washi-ink-light)" }}>
                     {workflowSteps[activeStep].tips}
                   </p>
                 </div>
@@ -237,18 +271,26 @@ export function WorkflowSection() {
           viewport={{ once: true }}
           transition={{ delay: 0.25 }}
         >
-          <h3 className="text-[14px] text-gray-400 uppercase tracking-wider mb-6" style={{ fontWeight: 600 }}>
+          <h3
+            className="text-[14px] uppercase tracking-wider mb-6"
+            style={{ fontWeight: 600, color: "var(--washi-ink-faint)" }}
+          >
             质量检查清单
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {qualityChecks.map((check) => (
               <div
                 key={check.category}
-                className="bg-white border border-gray-200/60 rounded-2xl p-5"
+                className="p-5"
+                style={{
+                  backgroundColor: "var(--washi-paper)",
+                  border: "1px solid var(--washi-border)",
+                  borderRadius: "var(--washi-radius)",
+                }}
               >
                 <div className="flex items-center gap-2 mb-4">
-                  <check.icon size={16} className="text-gray-400" />
-                  <h4 className="text-[14px]" style={{ fontWeight: 600 }}>
+                  <check.icon size={16} style={{ color: "var(--washi-ink-faint)" }} />
+                  <h4 className="text-[14px] font-serif" style={{ fontWeight: 600, color: "var(--washi-ink)" }}>
                     {check.category}
                   </h4>
                 </div>
@@ -259,26 +301,37 @@ export function WorkflowSection() {
                       className="flex items-center gap-2 py-1.5"
                     >
                       <div
-                        className={`w-2 h-2 rounded-full shrink-0 ${
-                          item.priority === "high"
-                            ? "bg-red-400"
-                            : item.priority === "medium"
-                            ? "bg-amber-400"
-                            : "bg-gray-300"
-                        }`}
+                        className="w-2 h-2 rounded-full shrink-0"
+                        style={{
+                          backgroundColor:
+                            item.priority === "high"
+                              ? "var(--washi-accent-vermillion)"
+                              : item.priority === "medium"
+                              ? "var(--washi-accent-ochre)"
+                              : "var(--washi-border-dark)",
+                        }}
                       />
-                      <span className="text-[12px] text-gray-600">
+                      <span className="text-[12px]" style={{ color: "var(--washi-ink-light)" }}>
                         {item.label}
                       </span>
                       <span
-                        className={`ml-auto text-[10px] px-1.5 py-0.5 rounded ${
-                          item.priority === "high"
-                            ? "bg-red-50 text-red-500"
-                            : item.priority === "medium"
-                            ? "bg-amber-50 text-amber-500"
-                            : "bg-gray-50 text-gray-400"
-                        }`}
-                        style={{ fontWeight: 500 }}
+                        className="ml-auto text-[10px] px-1.5 py-0.5"
+                        style={{
+                          fontWeight: 500,
+                          borderRadius: "var(--washi-radius)",
+                          backgroundColor:
+                            item.priority === "high"
+                              ? "var(--washi-accent-vermillion-light)"
+                              : item.priority === "medium"
+                              ? "var(--washi-accent-ochre-light)"
+                              : "var(--washi-bg-warm)",
+                          color:
+                            item.priority === "high"
+                              ? "var(--washi-accent-vermillion)"
+                              : item.priority === "medium"
+                              ? "var(--washi-accent-ochre)"
+                              : "var(--washi-ink-faint)",
+                        }}
                       >
                         {item.priority === "high" ? "必须" : item.priority === "medium" ? "建议" : "可选"}
                       </span>

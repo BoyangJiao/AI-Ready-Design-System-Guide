@@ -120,7 +120,7 @@ Use CSS Grid for page layouts
 Use Flexbox for component layouts
 Max content width: 1280px
 
-// 2. AI 自动遵循规范生成代码 ✨`,
+// 2. AI 自动遵循规范生成代码`,
     },
   },
 ];
@@ -131,35 +131,35 @@ const mcpFlow = [
     title: "Figma 设计稿",
     desc: "结构化的设计 + Design Tokens",
     icon: Figma,
-    color: "from-pink-500 to-red-500",
+    accent: "bg-[#C45B3E]",
   },
   {
     step: 2,
     title: "MCP Protocol",
     desc: "提取结构化设计数据",
     icon: FileJson,
-    color: "from-violet-500 to-indigo-500",
+    accent: "bg-[#2B4C7E]",
   },
   {
     step: 3,
     title: "Skills 文件",
     desc: "组件规范 + 代码模板",
     icon: BookOpen,
-    color: "from-amber-500 to-orange-500",
+    accent: "bg-[#8B6914]",
   },
   {
     step: 4,
     title: "AI 编程工具",
     desc: "Cursor / Claude / Copilot",
     icon: Brain,
-    color: "from-emerald-500 to-teal-500",
+    accent: "bg-[#4A7C59]",
   },
   {
     step: 5,
     title: "高保真代码",
     desc: "符合设计系统规范的输出",
     icon: Code,
-    color: "from-blue-500 to-cyan-500",
+    accent: "bg-[#2B4C7E]",
   },
 ];
 
@@ -169,21 +169,33 @@ export function SkillsSection() {
   const current = skillCategories.find((c) => c.id === activeCategory)!;
 
   return (
-    <section id="skills" className="py-24 px-6 bg-gray-50/50">
+    <section id="skills" className="py-24 px-6" style={{ backgroundColor: "var(--washi-bg-warm)" }}>
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-100 text-orange-700 text-[12px] mb-4" style={{ fontWeight: 500 }}>
+          <div
+            className="inline-flex items-center gap-2 px-3 py-1.5 text-[12px] mb-4"
+            style={{
+              fontWeight: 500,
+              backgroundColor: "var(--washi-accent-ochre-light)",
+              color: "var(--washi-accent-ochre)",
+              border: "1px solid var(--washi-accent-ochre)",
+              borderRadius: "var(--washi-radius)",
+            }}
+          >
             <Rocket size={13} />
             Skills & MCP 新范式
           </div>
-          <h2 className="text-3xl sm:text-4xl tracking-tight mb-3" style={{ fontWeight: 700, lineHeight: 1.2 }}>
+          <h2
+            className="text-3xl sm:text-4xl tracking-tight mb-3 font-serif"
+            style={{ fontWeight: 700, lineHeight: 1.2, color: "var(--washi-ink)" }}
+          >
             从「画图」到「编程」的桥梁
           </h2>
-          <p className="text-gray-500 text-[15px] max-w-2xl mb-12" style={{ lineHeight: 1.7 }}>
+          <p className="text-[15px] max-w-2xl mb-12" style={{ lineHeight: 1.7, color: "var(--washi-ink-light)" }}>
             2025-2026 年最重要的进展：Skills 文件和 MCP 协议让 AI 不仅能「看到」你的设计，还能「理解」你的设计系统规范。
           </p>
         </motion.div>
@@ -196,10 +208,20 @@ export function SkillsSection() {
           transition={{ delay: 0.15 }}
           className="mb-16"
         >
-          <h3 className="text-[14px] text-gray-400 uppercase tracking-wider mb-6" style={{ fontWeight: 600 }}>
+          <h3
+            className="text-[14px] uppercase tracking-wider mb-6"
+            style={{ fontWeight: 600, color: "var(--washi-ink-faint)" }}
+          >
             完整工作流
           </h3>
-          <div className="bg-white border border-gray-200/60 rounded-2xl p-6 overflow-x-auto">
+          <div
+            className="p-6 overflow-x-auto"
+            style={{
+              backgroundColor: "var(--washi-paper)",
+              border: "1px solid var(--washi-border)",
+              borderRadius: "var(--washi-radius)",
+            }}
+          >
             <div className="flex items-center gap-2 min-w-[700px]">
               {mcpFlow.map((step, i) => (
                 <div key={step.step} className="flex items-center gap-2 flex-1">
@@ -211,21 +233,22 @@ export function SkillsSection() {
                     className="flex flex-col items-center gap-2 flex-1"
                   >
                     <div
-                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-md`}
+                      className={`w-12 h-12 flex items-center justify-center ${step.accent}`}
+                      style={{ borderRadius: "var(--washi-radius)" }}
                     >
                       <step.icon size={20} className="text-white" />
                     </div>
                     <div className="text-center">
-                      <div className="text-[12px]" style={{ fontWeight: 600 }}>
+                      <div className="text-[12px]" style={{ fontWeight: 600, color: "var(--washi-ink)" }}>
                         {step.title}
                       </div>
-                      <div className="text-[10px] text-gray-400 mt-0.5">
+                      <div className="text-[10px] mt-0.5" style={{ color: "var(--washi-ink-faint)" }}>
                         {step.desc}
                       </div>
                     </div>
                   </motion.div>
                   {i < mcpFlow.length - 1 && (
-                    <ArrowRight size={16} className="text-gray-300 shrink-0" />
+                    <ArrowRight size={16} style={{ color: "var(--washi-border-dark)" }} className="shrink-0" />
                   )}
                 </div>
               ))}
@@ -245,12 +268,14 @@ export function SkillsSection() {
               <button
                 key={id}
                 onClick={() => setActiveCategory(id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[13px] transition-all ${
-                  activeCategory === id
-                    ? "bg-orange-100 text-orange-700"
-                    : "bg-gray-100 text-gray-500"
-                }`}
-                style={{ fontWeight: activeCategory === id ? 500 : 400 }}
+                className="flex items-center gap-2 px-4 py-2 text-[13px] transition-all"
+                style={{
+                  fontWeight: activeCategory === id ? 500 : 400,
+                  backgroundColor: activeCategory === id ? "var(--washi-accent-ochre-light)" : "var(--washi-bg-warm)",
+                  color: activeCategory === id ? "var(--washi-accent-ochre)" : "var(--washi-ink-light)",
+                  border: activeCategory === id ? "1px solid var(--washi-accent-ochre)" : "1px solid var(--washi-border)",
+                  borderRadius: "var(--washi-radius)",
+                }}
               >
                 <Icon size={14} />
                 {label}
@@ -268,20 +293,33 @@ export function SkillsSection() {
               className="grid grid-cols-1 md:grid-cols-2 gap-4"
             >
               {/* Content */}
-              <div className="bg-white border border-gray-200/60 rounded-2xl p-6">
-                <h3 className="text-[17px] mb-3" style={{ fontWeight: 600 }}>
+              <div
+                className="p-6"
+                style={{
+                  backgroundColor: "var(--washi-paper)",
+                  border: "1px solid var(--washi-border)",
+                  borderRadius: "var(--washi-radius)",
+                }}
+              >
+                <h3 className="text-[17px] mb-3 font-serif" style={{ fontWeight: 600, color: "var(--washi-ink)" }}>
                   {current.content.title}
                 </h3>
-                <p className="text-[13px] text-gray-500 mb-5" style={{ lineHeight: 1.7 }}>
+                <p className="text-[13px] mb-5" style={{ lineHeight: 1.7, color: "var(--washi-ink-light)" }}>
                   {current.content.desc}
                 </p>
                 <div className="space-y-2.5">
                   {current.content.points.map((point, i) => (
                     <div key={i} className="flex items-start gap-2">
-                      <div className="w-5 h-5 rounded-full bg-orange-100 flex items-center justify-center mt-0.5 shrink-0">
-                        <Zap size={10} className="text-orange-500" />
+                      <div
+                        className="w-5 h-5 flex items-center justify-center mt-0.5 shrink-0"
+                        style={{
+                          backgroundColor: "var(--washi-accent-ochre-light)",
+                          borderRadius: "50%",
+                        }}
+                      >
+                        <Zap size={10} style={{ color: "var(--washi-accent-ochre)" }} />
                       </div>
-                      <span className="text-[13px] text-gray-600" style={{ lineHeight: 1.6 }}>
+                      <span className="text-[13px]" style={{ lineHeight: 1.6, color: "var(--washi-ink-light)" }}>
                         {point}
                       </span>
                     </div>
@@ -290,18 +328,24 @@ export function SkillsSection() {
               </div>
 
               {/* Code example */}
-              <div className="bg-gray-900 rounded-2xl p-5 overflow-auto max-h-[420px]">
+              <div
+                className="p-5 overflow-auto max-h-[420px]"
+                style={{
+                  backgroundColor: "var(--washi-code-bg)",
+                  borderRadius: "var(--washi-radius)",
+                }}
+              >
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="w-3 h-3 rounded-full bg-red-400" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                  <div className="w-3 h-3 rounded-full bg-green-400" />
-                  <span className="ml-2 text-[11px] text-gray-500">
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: "var(--washi-accent-vermillion)" }} />
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: "var(--washi-accent-ochre)" }} />
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: "var(--washi-accent-bamboo)" }} />
+                  <span className="ml-2 text-[11px]" style={{ color: "var(--washi-code-comment)" }}>
                     {activeCategory === "what" ? "skills/button.md" : activeCategory === "mcp" ? "mcp-output.json" : "skills/design-system.md"}
                   </span>
                 </div>
                 <pre
-                  className="text-[12px] text-gray-300 whitespace-pre-wrap"
-                  style={{ fontFamily: "'JetBrains Mono', monospace", lineHeight: 1.7 }}
+                  className="text-[12px] whitespace-pre-wrap font-mono"
+                  style={{ lineHeight: 1.7, color: "var(--washi-code-text)" }}
                 >
                   {current.content.example}
                 </pre>
