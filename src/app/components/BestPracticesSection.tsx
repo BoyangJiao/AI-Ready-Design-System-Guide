@@ -12,9 +12,9 @@ import {
 
 const companies = [
   {
-    name: "Vercel",
-    product: "v0.dev",
-    desc: "通过内置 Design System Skills，v0 能够根据用户描述直接生成符合设计规范的 React + Tailwind 组件代码。",
+    name: "Vercel / v0",
+    product: "v0 Design Systems",
+    desc: "v0 内置 Design System Skills，根据用户描述生成符合设计规范的 React + Tailwind 代码。",
     practices: [
       "内置 shadcn/ui 组件库作为默认 Design System",
       "Skills 文件定义了严格的 Tailwind CSS 使用规范",
@@ -23,45 +23,53 @@ const companies = [
     ],
     color: "from-gray-800 to-gray-900",
     textColor: "text-white",
+    link: "https://v0.app/docs/design-systems",
+    linkLabel: "v0 Design Systems Docs",
   },
   {
     name: "Shopify",
-    product: "Polaris + AI",
-    desc: "Shopify 将 Polaris 设计系统与 AI 工具深度集成，确保所有 AI 生成的代码都遵循 Polaris 规范。",
+    product: "Polaris Design System",
+    desc: "Polaris 拥有完整的 Token 体系、严格的组件规范和丰富的文档，是 AI 生成生产级代码的标杆。",
     practices: [
       "Polaris 组件有完整的 Skills 文档供 AI 参考",
-      "Design Tokens 通过 Style Dictionary 管理",
-      "AI 生成代码自动应用 Polaris 的无障碍标准",
+      "Design Tokens 通过 Style Dictionary 管理和同步",
+      "AI 生成代码自动应用 Polaris 的无障碍标准 (WCAG)",
       "多主题支持通过 Token 层实现设计一致性",
     ],
     color: "from-green-600 to-emerald-700",
     textColor: "text-white",
+    link: "https://polaris.shopify.com/",
+    linkLabel: "Polaris Design System",
   },
   {
-    name: "GitHub",
-    product: "Primer + Copilot",
-    desc: "GitHub 将 Primer 设计系统作为 Copilot 的上下文，让 AI 在生成 UI 代码时自动遵循 Primer 规范。",
+    name: "Coinbase",
+    product: "Coinbase Design System (CDS)",
+    desc: "Coinbase Design System 提供了一套完整的、跨平台的组件库和设计规范，支持 Web 和移动端的一致性体验。",
     practices: [
-      "Primer 的 React 组件库有丰富的类型定义",
-      "MCP 协议连接 Figma 设计稿到 Copilot",
-      "自动化的 Design Token 同步工具链",
-      "AI 生成的组件自动匹配 Primer 的交互模式",
+      "完整的 Figma 组件库与代码组件一一对应",
+      "语义化 Token 体系覆盖颜色、排版、间距",
+      "组件属性（Variant/Boolean/String）精确映射 React Props",
+      "严格的无障碍标准和多主题支持",
     ],
-    color: "from-violet-600 to-purple-700",
+    color: "from-blue-600 to-indigo-700",
     textColor: "text-white",
+    link: "https://cds.coinbase.com/",
+    linkLabel: "Coinbase Design System",
   },
   {
-    name: "Figma",
-    product: "Make & Dev Mode",
-    desc: "Figma 官方推出的 Make 功能和 Dev Mode，原生支持将设计意图转化为 AI 可理解的结构化数据。",
+    name: "IBM",
+    product: "Carbon Design System",
+    desc: "Carbon 是 IBM 的开源设计系统，以其严谨的 Token 架构和完善的组件规范著称，被广泛用于企业级产品。",
     practices: [
-      "Dev Mode 自动提取组件的 Auto Layout 信息",
-      "Make 功能直接生成可运行的 React 应用",
-      "原生支持 Design Token 导出和同步",
-      "Figma Inspect 为 AI 提供精确的设计规格",
+      "完整的 Design Token 层级（Global → Alias → Component）",
+      "React/Web Components 双技术栈支持",
+      "详尽的组件使用指南和代码规范文档",
+      "成熟的主题化和无障碍支持体系",
     ],
-    color: "from-pink-500 to-red-500",
+    color: "from-gray-700 to-gray-900",
     textColor: "text-white",
+    link: "https://carbondesignsystem.com/",
+    linkLabel: "Carbon Design System",
   },
 ];
 
@@ -104,11 +112,10 @@ export function BestPracticesSection() {
             最佳实践
           </div>
           <h2 className="text-3xl sm:text-4xl tracking-tight mb-3" style={{ fontWeight: 700, lineHeight: 1.2 }}>
-            全球顶级团队的实践
+            支撑 AI Design-to-Code 的设计系统实践
           </h2>
-          <p className="text-gray-500 text-[15px] max-w-2xl mb-12" style={{ lineHeight: 1.7 }}>
-            Vercel、Shopify、GitHub、Figma 等公司已经在生产环境中验证了 AI-Ready 设计系统的价值。以下是他们的关键实践。
-          </p>
+          <p className="text-gray-500 text-[15px] max-w-2xl mb-4" style={{ lineHeight: 1.7 }}>这些公司的设计系统已经在生产环境中验证了 AI-Ready 设计系统的价值——通过精心构建的设计系统规范，让 AI 能够生成生产级别的高保真代码。</p>
+          
         </motion.div>
 
         {/* Company cards */}
@@ -156,7 +163,7 @@ export function BestPracticesSection() {
             <p className="text-[14px] opacity-80 mb-6" style={{ lineHeight: 1.7 }}>
               {companies[activeCompany].desc}
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
               {companies[activeCompany].practices.map((practice, i) => (
                 <div
                   key={i}
@@ -169,6 +176,19 @@ export function BestPracticesSection() {
                 </div>
               ))}
             </div>
+            {/* Link */}
+            <a
+              href={companies[activeCompany].link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 backdrop-blur-sm rounded-xl px-5 py-3 transition-all"
+            >
+              <ExternalLink size={14} className="opacity-80" />
+              <span className="text-[13px] opacity-90" style={{ fontWeight: 500 }}>
+                {companies[activeCompany].linkLabel}
+              </span>
+              <ArrowRight size={14} className="opacity-60" />
+            </a>
           </motion.div>
         </motion.div>
 

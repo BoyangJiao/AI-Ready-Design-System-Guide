@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { ArrowRight, ArrowDown, Maximize2, MinusSquare, AlignCenter, MoveHorizontal, MoveVertical } from "lucide-react";
+import { ArrowRight, ArrowDown, Maximize2, MinusSquare, AlignCenter, MoveHorizontal, MoveVertical, X, Check } from "lucide-react";
 
 const layoutExamples = [
   {
@@ -164,7 +164,7 @@ export function AutoLayoutSection() {
               <div
                 className={`border-2 border-dashed border-indigo-200 rounded-xl p-4 flex ${
                   example.direction === "vertical" ? "flex-col" : "flex-row"
-                } ${example.spaceBetween ? "justify-between" : ""} items-center`}
+                } ${(example as any).spaceBetween ? "justify-between" : ""} items-center`}
                 style={{
                   gap: `${example.gap}px`,
                   padding: `${example.paddingY}px ${example.paddingX}px`,
@@ -235,7 +235,7 @@ export function AutoLayoutSection() {
                   <span className="text-gray-500">{": "}</span>
                   <span className="text-amber-300">{"center"}</span>
                   <span className="text-gray-500">{";"}</span>{"\n"}
-                  {example.spaceBetween && (
+                  {(example as any).spaceBetween && (
                     <>
                       <span className="text-blue-300">{"justify-content"}</span>
                       <span className="text-gray-500">{": "}</span>
@@ -249,16 +249,21 @@ export function AutoLayoutSection() {
           </div>
         </motion.div>
 
-        {/* Responsive demo */}
+        {/* ─── Auto Layout vs No Auto Layout resize comparison ─── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.28 }}
+          className="mb-16"
         >
-          <h3 className="text-[14px] text-gray-400 uppercase tracking-wider mb-6" style={{ fontWeight: 600 }}>
-            Fill vs Fixed = 响应式设计
+          <h3 className="text-[14px] text-gray-400 uppercase tracking-wider mb-2" style={{ fontWeight: 600 }}>
+            窗口缩放对比
           </h3>
+          <p className="text-[13px] text-gray-400 mb-8">
+            同一个卡片组件，在浏览器窗口尺寸变化时，有 Auto Layout 和没有 Auto Layout 的代码表现截然不同
+          </p>
+
           <div className="flex gap-2 mb-6">
             {responsiveDemo.map((r, i) => (
               <button
@@ -275,29 +280,157 @@ export function AutoLayoutSection() {
               </button>
             ))}
           </div>
-          <div className="bg-white border border-gray-200/60 rounded-2xl p-6 flex justify-center">
-            <motion.div
-              animate={{ width: responsiveDemo[responsiveIndex].width }}
-              transition={{ type: "spring", stiffness: 200, damping: 25 }}
-              className="border-2 border-dashed border-indigo-200 rounded-xl p-4 flex flex-col gap-3"
-            >
-              <div className="bg-indigo-100 rounded-lg px-4 py-3 text-[12px] text-indigo-600 text-center" style={{ fontWeight: 500 }}>
-                Header <span className="text-indigo-400">(Fill ↔)</span>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* ── No Auto Layout ── */}
+            <div className="bg-white border border-red-200/60 rounded-2xl p-5">
+              <div className="flex items-center gap-2 mb-4">
+                <X size={14} className="text-red-500" />
+                <span className="text-[13px] text-red-600" style={{ fontWeight: 600 }}>
+                  无 Auto Layout（position: absolute）
+                </span>
               </div>
-              <div className={`flex gap-3 ${responsiveIndex === 2 ? "flex-col" : "flex-row"}`}>
-                <div className="bg-violet-100 rounded-lg px-4 py-8 text-[12px] text-violet-600 text-center flex-1" style={{ fontWeight: 500 }}>
-                  Sidebar <span className="text-violet-400">{responsiveIndex === 2 ? "(Fill)" : "(Fixed 200px)"}</span>
-                </div>
-                <div className="bg-emerald-100 rounded-lg px-4 py-8 text-[12px] text-emerald-600 text-center flex-[2]" style={{ fontWeight: 500 }}>
-                  Content <span className="text-emerald-400">(Fill ↔)</span>
-                </div>
+              <div className="bg-gray-50 rounded-xl p-4 flex justify-center overflow-hidden" style={{ minHeight: "200px" }}>
+                <motion.div
+                  animate={{ width: responsiveDemo[responsiveIndex].width }}
+                  transition={{ type: "spring", stiffness: 200, damping: 25 }}
+                  className="border-2 border-dashed border-red-200 rounded-xl relative"
+                  style={{ minHeight: "180px" }}
+                >
+                  {/* Fixed position elements - they break on resize */}
+                  <div
+                    className="bg-indigo-100 rounded-lg text-[11px] text-indigo-600 flex items-center justify-center"
+                    style={{
+                      fontWeight: 500,
+                      position: "absolute",
+                      left: "12px",
+                      top: "12px",
+                      right: "12px",
+                      height: "32px",
+                    }}
+                  >
+                    Header
+                  </div>
+                  <div
+                    className="bg-violet-100 rounded-lg text-[10px] text-violet-600 flex items-center justify-center"
+                    style={{
+                      fontWeight: 500,
+                      position: "absolute",
+                      left: "12px",
+                      top: "52px",
+                      width: "90px",
+                      height: "80px",
+                    }}
+                  >
+                    Sidebar
+                  </div>
+                  <div
+                    className="bg-emerald-100 rounded-lg text-[10px] text-emerald-600 flex items-center justify-center overflow-hidden"
+                    style={{
+                      fontWeight: 500,
+                      position: "absolute",
+                      left: "110px",
+                      top: "52px",
+                      width: "180px",
+                      height: "80px",
+                    }}
+                  >
+                    Content (fixed 180px)
+                  </div>
+                  <div
+                    className="bg-gray-200 rounded-lg text-[10px] text-gray-500 flex items-center justify-center"
+                    style={{
+                      fontWeight: 500,
+                      position: "absolute",
+                      left: "12px",
+                      bottom: "12px",
+                      width: "280px",
+                      height: "28px",
+                    }}
+                  >
+                    Footer (fixed 280px)
+                  </div>
+                </motion.div>
               </div>
-              <div className="bg-gray-100 rounded-lg px-4 py-3 text-[12px] text-gray-500 text-center" style={{ fontWeight: 500 }}>
-                Footer <span className="text-gray-400">(Fill ↔)</span>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <span className="text-[10px] bg-red-50 text-red-500 px-2 py-1 rounded" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                  position: absolute
+                </span>
+                <span className="text-[10px] bg-red-50 text-red-500 px-2 py-1 rounded" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                  width: 180px (固定)
+                </span>
               </div>
-            </motion.div>
+              <p className="text-[11px] text-red-400 mt-3" style={{ lineHeight: 1.5 }}>
+                {responsiveIndex === 0 
+                  ? "桌面端看起来勉强正常，但内容区固定宽度已经有隐患" 
+                  : responsiveIndex === 1 
+                  ? "⚠️ Content 溢出容器右侧，Footer 超出边界"
+                  : "💥 布局完全崩溃——Content 和 Footer 溢出不可见，Sidebar 占满整个宽度"}
+              </p>
+            </div>
+
+            {/* ── With Auto Layout ── */}
+            <div className="bg-white border border-emerald-200/60 rounded-2xl p-5">
+              <div className="flex items-center gap-2 mb-4">
+                <Check size={14} className="text-emerald-500" />
+                <span className="text-[13px] text-emerald-600" style={{ fontWeight: 600 }}>
+                  使用 Auto Layout（Flexbox）
+                </span>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-4 flex justify-center" style={{ minHeight: "200px" }}>
+                <motion.div
+                  animate={{ width: responsiveDemo[responsiveIndex].width }}
+                  transition={{ type: "spring", stiffness: 200, damping: 25 }}
+                  className="border-2 border-dashed border-emerald-200 rounded-xl p-3 flex flex-col gap-2"
+                >
+                  <div className="bg-indigo-100 rounded-lg px-3 py-2 text-[11px] text-indigo-600 text-center" style={{ fontWeight: 500 }}>
+                    Header <span className="text-indigo-400">(Fill ↔)</span>
+                  </div>
+                  <div className={`flex gap-2 ${responsiveIndex === 2 ? "flex-col" : "flex-row"}`}>
+                    <div
+                      className={`bg-violet-100 rounded-lg px-3 py-6 text-[10px] text-violet-600 text-center ${
+                        responsiveIndex === 2 ? "" : "shrink-0"
+                      }`}
+                      style={{
+                        fontWeight: 500,
+                        width: responsiveIndex === 2 ? "100%" : "90px",
+                      }}
+                    >
+                      Sidebar
+                      <span className="text-violet-400 block">
+                        {responsiveIndex === 2 ? "(Fill)" : "(Fixed 90px)"}
+                      </span>
+                    </div>
+                    <div className="bg-emerald-100 rounded-lg px-3 py-6 text-[10px] text-emerald-600 text-center flex-1" style={{ fontWeight: 500 }}>
+                      Content <span className="text-emerald-400">(Fill ↔)</span>
+                    </div>
+                  </div>
+                  <div className="bg-gray-200 rounded-lg px-3 py-2 text-[10px] text-gray-500 text-center" style={{ fontWeight: 500 }}>
+                    Footer <span className="text-gray-400">(Fill ↔)</span>
+                  </div>
+                </motion.div>
+              </div>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <span className="text-[10px] bg-emerald-50 text-emerald-500 px-2 py-1 rounded" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                  display: flex
+                </span>
+                <span className="text-[10px] bg-emerald-50 text-emerald-500 px-2 py-1 rounded" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                  flex: 1 (自适应)
+                </span>
+              </div>
+              <p className="text-[11px] text-emerald-500 mt-3" style={{ lineHeight: 1.5 }}>
+                {responsiveIndex === 0 
+                  ? "✅ 所有元素按 Flex 规则自动排列，Content 自适应剩余空间" 
+                  : responsiveIndex === 1 
+                  ? "✅ 完美适配——Content 自动收缩，Sidebar 保持固定宽度"
+                  : "✅ 自动切换为垂直布局，Sidebar 变为全宽，内容依然完整"}
+              </p>
+            </div>
           </div>
         </motion.div>
+
+        {/* Fill vs Fixed Responsive demo */}
+        
       </div>
     </section>
   );

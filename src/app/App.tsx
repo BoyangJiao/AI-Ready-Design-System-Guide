@@ -1,6 +1,7 @@
 import { Navigation } from "./components/Navigation";
 import { HeroSection } from "./components/HeroSection";
 import { MindsetSection } from "./components/MindsetSection";
+import { DesignSystemProtocol } from "./components/DesignSystemProtocol";
 import { AIReadyComparison } from "./components/AIReadyComparison";
 import { LayerSection } from "./components/LayerSection";
 import { AutoLayoutSection } from "./components/AutoLayoutSection";
@@ -17,6 +18,7 @@ export default function App() {
       <main className="lg:ml-64">
         <HeroSection />
         <MindsetSection />
+        <DesignSystemProtocol />
         <AIReadyComparison />
         <LayerSection />
         <AutoLayoutSection />

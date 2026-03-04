@@ -10,11 +10,13 @@ import {
   Menu,
   X,
   Rocket,
+  Music,
 } from "lucide-react";
 
 const sections = [
   { id: "hero", label: "概览", icon: Sparkles },
   { id: "mindset", label: "核心理念", icon: BookOpen },
+  { id: "protocol", label: "设计系统即协议", icon: Music },
   { id: "comparison", label: "交互式对比", icon: Sparkles },
   { id: "layers", label: "图层与结构", icon: Layers },
   { id: "autolayout", label: "Auto Layout", icon: Workflow },
@@ -100,8 +102,9 @@ export function Navigation() {
           ))}
         </div>
         <div className="p-4 border-t border-gray-100">
-          <div className="text-[11px] text-gray-400 text-center">
-            2026 · AI-Ready Design System Guide
+          <div className="text-[11px] text-gray-400 text-center">2026 · AI-Ready Design System Handbook</div>
+          <div className="text-[10px] text-gray-300 text-center mt-1">
+            © Boyang Jiao All Rights Reserved
           </div>
         </div>
       </nav>

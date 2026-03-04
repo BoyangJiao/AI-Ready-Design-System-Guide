@@ -91,13 +91,13 @@ const skillCategories = [
     label: "实际应用",
     icon: Rocket,
     content: {
-      title: "全球顶级团队的最佳实践",
-      desc: "2025-2026 年，Vercel、Shopify、GitHub 等团队已经在生产环境中使用 Skills + MCP 的组合来加速设计到代码的转化。",
+      title: "已验证的设计系统实践",
+      desc: "Vercel、Shopify、Coinbase、IBM 等团队已经在生产环境中使用 Skills + MCP 的组合来加速设计到代码的转化。",
       points: [
-        "Vercel 的 v0：内置 Design System Skills，一键生成符合规范的 UI",
+        "Vercel v0：内置 Design System Skills，一键生成符合规范的 UI",
         "Shopify Polaris：通过 Skills 文件确保 AI 遵循 Polaris 设计系统",
-        "GitHub Primer：利用 MCP 将 Primer 组件库与 Copilot 深度集成",
-        "Figma 官方：Make 和 Dev Mode 原生支持 AI-Ready 设计导出",
+        "Coinbase CDS：完整的 Figma 组件库与代码组件精确映射",
+        "IBM Carbon：严谨的 Token 层级架构和详尽的组件使用规范",
       ],
       example: `// Vercel v0 + Skills 工作流
 // 1. 定义 Design System Skills
