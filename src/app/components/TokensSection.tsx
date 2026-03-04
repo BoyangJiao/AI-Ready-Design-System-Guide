@@ -76,7 +76,7 @@ export function TokensSection() {
             </h3>
             <div className="flex flex-col sm:flex-row items-center gap-3">
               {[
-                { label: "Figma Styles", desc: "颜色/文字样式", color: "bg-pink-100 text-pink-700 border-pink-200" },
+                { label: "Figma Variables", desc: "颜色/间距变量", color: "bg-pink-100 text-pink-700 border-pink-200" },
                 { label: "Design Tokens", desc: "JSON/YAML 格式", color: "bg-amber-100 text-amber-700 border-amber-200" },
                 { label: "CSS Variables", desc: "--color-primary", color: "bg-indigo-100 text-indigo-700 border-indigo-200" },
                 { label: "Tailwind Config", desc: "theme.extend", color: "bg-emerald-100 text-emerald-700 border-emerald-200" },
@@ -111,11 +111,10 @@ export function TokensSection() {
               <button
                 key={key}
                 onClick={() => setActiveTab(key)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[13px] transition-all ${
-                  activeTab === key
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[13px] transition-all ${activeTab === key
                     ? "bg-amber-100 text-amber-700"
                     : "bg-gray-100 text-gray-500"
-                }`}
+                  }`}
                 style={{ fontWeight: activeTab === key ? 500 : 400 }}
               >
                 <Icon size={14} />
@@ -223,8 +222,8 @@ export function TokensSection() {
                   {activeTab === "colors"
                     ? "tokens.css"
                     : activeTab === "typography"
-                    ? "typography.css"
-                    : "spacing.css"}
+                      ? "typography.css"
+                      : "spacing.css"}
                 </span>
               </div>
               <pre

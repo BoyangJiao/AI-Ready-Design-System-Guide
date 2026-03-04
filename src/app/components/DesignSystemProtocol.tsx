@@ -96,7 +96,7 @@ const maturityItems = [
   {
     category: "令牌化样式",
     items: [
-      "所有颜色使用 Figma 的颜色样式（Color Styles）",
+      "所有颜色使用 Figma 变量（Variables）",
       "字体使用统一的文字样式（Text Styles）",
       "建立了 Design Tokens 并导出为 JSON/CSS 变量",
     ],
@@ -309,11 +309,10 @@ export function DesignSystemProtocol() {
                 <button
                   key={p.id}
                   onClick={() => setActivePillar(i)}
-                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-[13px] transition-all border ${
-                    activePillar === i
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-[13px] transition-all border ${activePillar === i
                       ? `bg-${p.color}-50 text-${p.color}-700 border-${p.color}-200`
                       : "bg-gray-50 text-gray-500 border-transparent hover:bg-gray-100"
-                  }`}
+                    }`}
                   style={{ fontWeight: activePillar === i ? 600 : 400 }}
                 >
                   <Icon size={15} />
@@ -537,15 +536,14 @@ export function DesignSystemProtocol() {
             <div className="flex items-center gap-4 flex-1 w-full">
               <div className="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden">
                 <motion.div
-                  className={`h-full rounded-full ${
-                    pct >= 90
+                  className={`h-full rounded-full ${pct >= 90
                       ? "bg-gradient-to-r from-emerald-400 to-emerald-500"
                       : pct >= 65
-                      ? "bg-gradient-to-r from-blue-400 to-blue-500"
-                      : pct >= 35
-                      ? "bg-gradient-to-r from-amber-400 to-amber-500"
-                      : "bg-gradient-to-r from-red-400 to-red-500"
-                  }`}
+                        ? "bg-gradient-to-r from-blue-400 to-blue-500"
+                        : pct >= 35
+                          ? "bg-gradient-to-r from-amber-400 to-amber-500"
+                          : "bg-gradient-to-r from-red-400 to-red-500"
+                    }`}
                   animate={{ width: `${pct}%` }}
                   transition={{ type: "spring", stiffness: 200 }}
                 />
@@ -555,15 +553,14 @@ export function DesignSystemProtocol() {
               </span>
             </div>
             <div
-              className={`px-4 py-2 rounded-xl text-[13px] ${
-                pct >= 90
+              className={`px-4 py-2 rounded-xl text-[13px] ${pct >= 90
                   ? "bg-emerald-100 text-emerald-700"
                   : pct >= 65
-                  ? "bg-blue-100 text-blue-700"
-                  : pct >= 35
-                  ? "bg-amber-100 text-amber-700"
-                  : "bg-red-100 text-red-700"
-              }`}
+                    ? "bg-blue-100 text-blue-700"
+                    : pct >= 35
+                      ? "bg-amber-100 text-amber-700"
+                      : "bg-red-100 text-red-700"
+                }`}
               style={{ fontWeight: 600 }}
             >
               {maturity.emoji} {maturity.label}
@@ -595,18 +592,16 @@ export function DesignSystemProtocol() {
                         className="w-full flex items-start gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 transition-colors text-left"
                       >
                         <div
-                          className={`w-5 h-5 rounded-md flex items-center justify-center transition-all mt-0.5 shrink-0 ${
-                            checked
+                          className={`w-5 h-5 rounded-md flex items-center justify-center transition-all mt-0.5 shrink-0 ${checked
                               ? "bg-violet-500 text-white"
                               : "border-2 border-gray-300"
-                          }`}
+                            }`}
                         >
                           {checked && <Check size={12} />}
                         </div>
                         <span
-                          className={`text-[13px] transition-all ${
-                            checked ? "text-gray-400 line-through" : "text-gray-700"
-                          }`}
+                          className={`text-[13px] transition-all ${checked ? "text-gray-400 line-through" : "text-gray-700"
+                            }`}
                           style={{ lineHeight: 1.5 }}
                         >
                           {item}
