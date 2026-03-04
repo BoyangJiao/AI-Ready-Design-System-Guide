@@ -61,8 +61,8 @@ const propTypes: PropType[] = [
       },
       {
         figmaProp: "State",
-        figmaValues: "Default | Hover | Active | Disabled",
-        reactProp: 'state: "default" | "hover" | "active" | "disabled"',
+        figmaValues: "Default | Hover | Active",
+        reactProp: 'state: "default" | "hover" | "active"',
         reactCode: "// 通常由交互行为自动控制\n// 而非手动传入",
       },
     ],
@@ -261,11 +261,10 @@ export function ComponentsSection() {
                 <button
                   key={pt.id}
                   onClick={() => setActivePropType(pt.id)}
-                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-[13px] transition-all border ${
-                    activePropType === pt.id
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-[13px] transition-all border ${activePropType === pt.id
                       ? `${c.bg} ${c.text} ${c.border}`
                       : "bg-white text-gray-500 border-gray-200 hover:bg-gray-50"
-                  }`}
+                    }`}
                   style={{ fontWeight: activePropType === pt.id ? 600 : 400 }}
                 >
                   <Icon size={15} />
@@ -347,9 +346,8 @@ export function ComponentsSection() {
                       {pt.examples.map((ex, i) => (
                         <div
                           key={i}
-                          className={`grid grid-cols-12 px-5 py-4 items-start ${
-                            i < pt.examples.length - 1 ? "border-b border-gray-100" : ""
-                          }`}
+                          className={`grid grid-cols-12 px-5 py-4 items-start ${i < pt.examples.length - 1 ? "border-b border-gray-100" : ""
+                            }`}
                         >
                           <div className="col-span-3">
                             <span
@@ -457,11 +455,10 @@ export function ComponentsSection() {
                       <button
                         key={v}
                         onClick={() => setBtnVariant(v)}
-                        className={`px-3 py-1.5 rounded-lg text-[12px] transition-all border ${
-                          btnVariant === v
+                        className={`px-3 py-1.5 rounded-lg text-[12px] transition-all border ${btnVariant === v
                             ? "bg-violet-100 text-violet-700 border-violet-300"
                             : "bg-gray-50 text-gray-500 border-gray-200 hover:bg-gray-100"
-                        }`}
+                          }`}
                         style={{ fontWeight: btnVariant === v ? 600 : 400 }}
                       >
                         {v}
@@ -486,11 +483,10 @@ export function ComponentsSection() {
                       <button
                         key={s}
                         onClick={() => setBtnSize(s)}
-                        className={`px-3 py-1.5 rounded-lg text-[12px] transition-all border ${
-                          btnSize === s
+                        className={`px-3 py-1.5 rounded-lg text-[12px] transition-all border ${btnSize === s
                             ? "bg-violet-100 text-violet-700 border-violet-300"
                             : "bg-gray-50 text-gray-500 border-gray-200 hover:bg-gray-100"
-                        }`}
+                          }`}
                         style={{ fontWeight: btnSize === s ? 600 : 400 }}
                       >
                         {s}
@@ -512,14 +508,12 @@ export function ComponentsSection() {
                   </div>
                   <button
                     onClick={() => setBtnDisabled(!btnDisabled)}
-                    className={`w-10 h-6 rounded-full transition-all relative ${
-                      btnDisabled ? "bg-blue-500" : "bg-gray-300"
-                    }`}
+                    className={`w-10 h-6 rounded-full transition-all relative ${btnDisabled ? "bg-blue-500" : "bg-gray-300"
+                      }`}
                   >
                     <div
-                      className={`w-4 h-4 bg-white rounded-full absolute top-1 transition-all shadow-sm ${
-                        btnDisabled ? "left-5" : "left-1"
-                      }`}
+                      className={`w-4 h-4 bg-white rounded-full absolute top-1 transition-all shadow-sm ${btnDisabled ? "left-5" : "left-1"
+                        }`}
                     />
                   </button>
                 </div>
@@ -537,14 +531,12 @@ export function ComponentsSection() {
                   </div>
                   <button
                     onClick={() => setBtnLoading(!btnLoading)}
-                    className={`w-10 h-6 rounded-full transition-all relative ${
-                      btnLoading ? "bg-blue-500" : "bg-gray-300"
-                    }`}
+                    className={`w-10 h-6 rounded-full transition-all relative ${btnLoading ? "bg-blue-500" : "bg-gray-300"
+                      }`}
                   >
                     <div
-                      className={`w-4 h-4 bg-white rounded-full absolute top-1 transition-all shadow-sm ${
-                        btnLoading ? "left-5" : "left-1"
-                      }`}
+                      className={`w-4 h-4 bg-white rounded-full absolute top-1 transition-all shadow-sm ${btnLoading ? "left-5" : "left-1"
+                        }`}
                     />
                   </button>
                 </div>
@@ -562,14 +554,12 @@ export function ComponentsSection() {
                   </div>
                   <button
                     onClick={() => setBtnShowIcon(!btnShowIcon)}
-                    className={`w-10 h-6 rounded-full transition-all relative ${
-                      btnShowIcon ? "bg-blue-500" : "bg-gray-300"
-                    }`}
+                    className={`w-10 h-6 rounded-full transition-all relative ${btnShowIcon ? "bg-blue-500" : "bg-gray-300"
+                      }`}
                   >
                     <div
-                      className={`w-4 h-4 bg-white rounded-full absolute top-1 transition-all shadow-sm ${
-                        btnShowIcon ? "left-5" : "left-1"
-                      }`}
+                      className={`w-4 h-4 bg-white rounded-full absolute top-1 transition-all shadow-sm ${btnShowIcon ? "left-5" : "left-1"
+                        }`}
                     />
                   </button>
                 </div>
@@ -798,9 +788,8 @@ export function ComponentsSection() {
             ].map((row, i) => (
               <div
                 key={row.type}
-                className={`grid grid-cols-12 px-5 py-4 items-center ${
-                  i < 3 ? "border-b border-gray-100" : ""
-                }`}
+                className={`grid grid-cols-12 px-5 py-4 items-center ${i < 3 ? "border-b border-gray-100" : ""
+                  }`}
               >
                 <div className="col-span-3">
                   <span

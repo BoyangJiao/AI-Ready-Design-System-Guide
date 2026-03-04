@@ -40,15 +40,27 @@ export function Navigation() {
           }
         });
       },
-      { threshold: 0.3, rootMargin: "-80px 0px -40% 0px" }
+      { threshold: 0.1, rootMargin: "-100px 0px -60% 0px" }
     );
+
+    const handleScroll = () => {
+      // If at bottom of page, always focus bestpractices
+      if (window.innerHeight + Math.ceil(window.scrollY) >= document.documentElement.scrollHeight - 50) {
+        setActive("bestpractices");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
 
     sections.forEach(({ id }) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const scrollTo = (id: string) => {
@@ -86,11 +98,10 @@ export function Navigation() {
             <button
               key={id}
               onClick={() => scrollTo(id)}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] mb-1 transition-all duration-200 text-left ${
-                active === id
-                  ? "bg-violet-50 text-violet-700"
-                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-              }`}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] mb-1 transition-all duration-200 text-left ${active === id
+                ? "bg-violet-50 text-violet-700"
+                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                }`}
               style={{ fontWeight: active === id ? 500 : 400 }}
             >
               <Icon size={16} className={active === id ? "text-violet-500" : "text-gray-400"} />
@@ -145,11 +156,10 @@ export function Navigation() {
                   <button
                     key={id}
                     onClick={() => scrollTo(id)}
-                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] mb-1 transition-all duration-200 text-left ${
-                      active === id
-                        ? "bg-violet-50 text-violet-700"
-                        : "text-gray-600 hover:bg-gray-50"
-                    }`}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] mb-1 transition-all duration-200 text-left ${active === id
+                      ? "bg-violet-50 text-violet-700"
+                      : "text-gray-600 hover:bg-gray-50"
+                      }`}
                     style={{ fontWeight: active === id ? 500 : 400 }}
                   >
                     <Icon size={16} className={active === id ? "text-violet-500" : "text-gray-400"} />
