@@ -57,31 +57,31 @@ function LayerTreeItem({
   isGood: boolean;
 }) {
   const typeColors: Record<string, string> = {
-    frame: "bg-blue-100 text-blue-600",
-    component: "bg-violet-100 text-violet-600",
-    text: "bg-emerald-100 text-emerald-600",
-    rect: "bg-gray-100 text-gray-500",
-    image: "bg-amber-100 text-amber-600",
-    group: "bg-gray-100 text-gray-500",
+    frame: "bg-indigo/10 text-indigo",
+    component: "bg-ochre/10 text-ochre",
+    text: "bg-bamboo/10 text-bamboo",
+    rect: "bg-stone/10 text-stone",
+    image: "bg-ochre/10 text-ochre",
+    group: "bg-stone/10 text-stone",
   };
 
   return (
     <div
-      className="flex items-center gap-2 py-1.5 px-2 rounded-lg hover:bg-gray-50 transition-colors"
+      className="flex items-center gap-2 py-1.5 px-2 rounded-md hover:bg-washi-cream transition-colors"
       style={{ paddingLeft: `${indent * 20 + 8}px` }}
     >
       {indent > 0 && (
-        <ChevronRight size={12} className="text-gray-300 -ml-4" />
+        <ChevronRight size={12} className="text-stone/40 -ml-4" />
       )}
       <span
-        className={`text-[10px] px-1.5 py-0.5 rounded ${typeColors[type] || typeColors.frame}`}
-        style={{ fontWeight: 500, fontFamily: "'JetBrains Mono', monospace" }}
+        className={`text-[10px] px-1.5 py-0.5 rounded-sm font-mono ${typeColors[type] || typeColors.frame}`}
+        style={{ fontWeight: 500 }}
       >
         {type === "component" ? "◆" : type === "text" ? "T" : type === "image" ? "▣" : "□"}
       </span>
       <span
-        className={`text-[13px] ${isGood ? "text-gray-700" : "text-gray-400"}`}
-        style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400 }}
+        className={`text-[13px] font-mono ${isGood ? "text-ink-secondary" : "text-stone"}`}
+        style={{ fontWeight: 400 }}
       >
         {name}
       </span>
@@ -93,21 +93,21 @@ export function LayerSection() {
   const [showGood, setShowGood] = useState(false);
 
   return (
-    <section id="layers" className="py-24 px-6 bg-gray-50/50">
+    <section id="layers" className="py-24 px-6 bg-washi-warm">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100 text-blue-700 text-[12px] mb-4" style={{ fontWeight: 500 }}>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-indigo/10 text-indigo text-[12px] mb-4 font-sans" style={{ fontWeight: 500 }}>
             <Layers size={13} />
             图层与结构
           </div>
-          <h2 className="text-3xl sm:text-4xl tracking-tight mb-3" style={{ fontWeight: 700, lineHeight: 1.2 }}>
+          <h2 className="text-3xl sm:text-4xl tracking-tight mb-3 text-ink-primary font-serif" style={{ fontWeight: 700, lineHeight: 1.2 }}>
             语义化命名与逻辑化分组
           </h2>
-          <p className="text-gray-500 text-[15px] max-w-2xl mb-12" style={{ lineHeight: 1.7 }}>
+          <p className="text-ink-muted text-[15px] max-w-2xl mb-12 font-sans" style={{ lineHeight: 1.8 }}>
             图层命名是最基本也是最重要的一点。它直接影响到生成代码的类名和组件名，是 AI 理解你设计意图的第一步。
           </p>
         </motion.div>
@@ -121,44 +121,44 @@ export function LayerSection() {
           className="mb-12"
         >
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-[14px] text-gray-400 uppercase tracking-wider" style={{ fontWeight: 600 }}>
+            <h3 className="text-[14px] text-stone uppercase tracking-wider font-sans" style={{ fontWeight: 600 }}>
               图层结构对比
             </h3>
             <button
               onClick={() => setShowGood(!showGood)}
-              className={`px-4 py-2 rounded-lg text-[13px] transition-all ${
+              className={`px-4 py-2 rounded-md text-[13px] transition-all font-sans ${
                 showGood
-                  ? "bg-emerald-100 text-emerald-700"
-                  : "bg-red-100 text-red-700"
+                  ? "bg-bamboo/10 text-bamboo"
+                  : "bg-vermillion/10 text-vermillion"
               }`}
               style={{ fontWeight: 500 }}
             >
-              {showGood ? "✓ AI-Ready 结构" : "✗ 传统结构"} — 点击切换
+              {showGood ? "AI-Ready 结构" : "传统结构"} — 点击切换
             </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Layer tree panel */}
             <div
-              className={`rounded-2xl border p-4 transition-all duration-500 ${
+              className={`rounded-md border p-4 transition-all duration-500 ${
                 showGood
-                  ? "bg-white border-emerald-200/60"
-                  : "bg-white border-red-200/60"
+                  ? "bg-washi-cream border-bamboo/20"
+                  : "bg-washi-cream border-vermillion/20"
               }`}
             >
-              <div className="flex items-center gap-2 mb-3 pb-3 border-b border-gray-100">
+              <div className="flex items-center gap-2 mb-3 pb-3 border-b border-border">
                 <div
                   className={`w-5 h-5 rounded-full flex items-center justify-center ${
-                    showGood ? "bg-emerald-100" : "bg-red-100"
+                    showGood ? "bg-bamboo/10" : "bg-vermillion/10"
                   }`}
                 >
                   {showGood ? (
-                    <Check size={12} className="text-emerald-500" />
+                    <Check size={12} className="text-bamboo" />
                   ) : (
-                    <X size={12} className="text-red-500" />
+                    <X size={12} className="text-vermillion" />
                   )}
                 </div>
-                <span className="text-[12px] text-gray-500" style={{ fontWeight: 500 }}>
+                <span className="text-[12px] text-ink-muted font-sans" style={{ fontWeight: 500 }}>
                   {showGood ? "Figma 图层面板 — 优化后" : "Figma 图层面板 — 优化前"}
                 </span>
               </div>
@@ -175,70 +175,70 @@ export function LayerSection() {
             </div>
 
             {/* Generated code panel */}
-            <div className="bg-gray-900 rounded-2xl p-5 overflow-hidden">
+            <div className="bg-ink-primary rounded-md p-5 overflow-hidden">
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-3 h-3 rounded-full bg-red-400" />
-                <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                <div className="w-3 h-3 rounded-full bg-green-400" />
-                <span className="ml-2 text-[11px] text-gray-500">生成的代码</span>
+                <div className="w-3 h-3 rounded-full bg-vermillion/60" />
+                <div className="w-3 h-3 rounded-full bg-ochre/60" />
+                <div className="w-3 h-3 rounded-full bg-bamboo/60" />
+                <span className="ml-2 text-[11px] text-stone/60 font-sans">生成的代码</span>
               </div>
               <pre
-                className="text-[12px] overflow-x-auto"
-                style={{ fontFamily: "'JetBrains Mono', monospace", lineHeight: 1.8 }}
+                className="text-[12px] overflow-x-auto font-mono"
+                style={{ lineHeight: 1.8 }}
               >
                 {showGood ? (
                   <code>
-                    <span className="text-violet-400">{"<Card-Product>"}</span>{"\n"}
-                    <span className="text-gray-500">  </span>
-                    <span className="text-blue-400">{"<Card-Header>"}</span>{"\n"}
-                    <span className="text-gray-500">    </span>
-                    <span className="text-amber-300">{"<Product-Image />"}</span>{"\n"}
-                    <span className="text-gray-500">    </span>
-                    <span className="text-violet-400">{"<Badge-Sale />"}</span>{"\n"}
-                    <span className="text-gray-500">  </span>
-                    <span className="text-blue-400">{"</Card-Header>"}</span>{"\n"}
-                    <span className="text-gray-500">  </span>
-                    <span className="text-blue-400">{"<Card-Body>"}</span>{"\n"}
-                    <span className="text-gray-500">    </span>
-                    <span className="text-emerald-400">{"<Product-Title />"}</span>{"\n"}
-                    <span className="text-gray-500">    </span>
-                    <span className="text-emerald-400">{"<Product-Price />"}</span>{"\n"}
-                    <span className="text-gray-500">    </span>
-                    <span className="text-violet-400">{"<Rating-Stars />"}</span>{"\n"}
-                    <span className="text-gray-500">  </span>
-                    <span className="text-blue-400">{"</Card-Body>"}</span>{"\n"}
-                    <span className="text-gray-500">  </span>
-                    <span className="text-blue-400">{"<Card-Footer>"}</span>{"\n"}
-                    <span className="text-gray-500">    </span>
-                    <span className="text-violet-400">{"<Button-AddToCart />"}</span>{"\n"}
-                    <span className="text-gray-500">  </span>
-                    <span className="text-blue-400">{"</Card-Footer>"}</span>{"\n"}
-                    <span className="text-violet-400">{"</Card-Product>"}</span>
+                    <span className="text-ochre-light">{"<Card-Product>"}</span>{"\n"}
+                    <span className="text-stone/50">  </span>
+                    <span className="text-indigo-light">{"<Card-Header>"}</span>{"\n"}
+                    <span className="text-stone/50">    </span>
+                    <span className="text-ochre-light">{"<Product-Image />"}</span>{"\n"}
+                    <span className="text-stone/50">    </span>
+                    <span className="text-ochre-light">{"<Badge-Sale />"}</span>{"\n"}
+                    <span className="text-stone/50">  </span>
+                    <span className="text-indigo-light">{"</Card-Header>"}</span>{"\n"}
+                    <span className="text-stone/50">  </span>
+                    <span className="text-indigo-light">{"<Card-Body>"}</span>{"\n"}
+                    <span className="text-stone/50">    </span>
+                    <span className="text-bamboo-light">{"<Product-Title />"}</span>{"\n"}
+                    <span className="text-stone/50">    </span>
+                    <span className="text-bamboo-light">{"<Product-Price />"}</span>{"\n"}
+                    <span className="text-stone/50">    </span>
+                    <span className="text-ochre-light">{"<Rating-Stars />"}</span>{"\n"}
+                    <span className="text-stone/50">  </span>
+                    <span className="text-indigo-light">{"</Card-Body>"}</span>{"\n"}
+                    <span className="text-stone/50">  </span>
+                    <span className="text-indigo-light">{"<Card-Footer>"}</span>{"\n"}
+                    <span className="text-stone/50">    </span>
+                    <span className="text-ochre-light">{"<Button-AddToCart />"}</span>{"\n"}
+                    <span className="text-stone/50">  </span>
+                    <span className="text-indigo-light">{"</Card-Footer>"}</span>{"\n"}
+                    <span className="text-ochre-light">{"</Card-Product>"}</span>
                   </code>
                 ) : (
                   <code>
-                    <span className="text-gray-500">{"<div>"}</span>{"\n"}
-                    <span className="text-gray-500">  {"<div>"}</span>
-                    <span className="text-gray-600"> {"/* 矩形 5 */"}</span>{"\n"}
-                    <span className="text-gray-500">  {"<div>"}</span>
-                    <span className="text-gray-600"> {"/* Group 3 */"}</span>{"\n"}
-                    <span className="text-gray-500">    {"<span>"}</span>
-                    <span className="text-gray-600">{"..."}</span>
-                    <span className="text-gray-500">{"</span>"}</span>{"\n"}
-                    <span className="text-gray-500">    {"<div>"}</span>
-                    <span className="text-gray-600"> {"/* Frame 24 */"}</span>{"\n"}
-                    <span className="text-gray-500">      {"<div>"}</span>
-                    <span className="text-gray-600"> {"/* 矩形 7 */"}</span>{"\n"}
-                    <span className="text-gray-500">      {"<span>"}</span>
-                    <span className="text-gray-600">{"..."}</span>
-                    <span className="text-gray-500">{"</span>"}</span>{"\n"}
-                    <span className="text-gray-500">    {"</div>"}</span>{"\n"}
-                    <span className="text-gray-500">  {"</div>"}</span>{"\n"}
-                    <span className="text-gray-500">  {"<div>"}</span>
-                    <span className="text-gray-600"> {"/* 矩形 12 */"}</span>{"\n"}
-                    <span className="text-gray-500">    {"<div>"}</span>
-                    <span className="text-gray-600"> {"/* Frame 99 */"}</span>{"\n"}
-                    <span className="text-gray-500">{"</div>"}</span>
+                    <span className="text-stone/50">{"<div>"}</span>{"\n"}
+                    <span className="text-stone/50">  {"<div>"}</span>
+                    <span className="text-stone/30"> {"/* 矩形 5 */"}</span>{"\n"}
+                    <span className="text-stone/50">  {"<div>"}</span>
+                    <span className="text-stone/30"> {"/* Group 3 */"}</span>{"\n"}
+                    <span className="text-stone/50">    {"<span>"}</span>
+                    <span className="text-stone/30">{"..."}</span>
+                    <span className="text-stone/50">{"</span>"}</span>{"\n"}
+                    <span className="text-stone/50">    {"<div>"}</span>
+                    <span className="text-stone/30"> {"/* Frame 24 */"}</span>{"\n"}
+                    <span className="text-stone/50">      {"<div>"}</span>
+                    <span className="text-stone/30"> {"/* 矩形 7 */"}</span>{"\n"}
+                    <span className="text-stone/50">      {"<span>"}</span>
+                    <span className="text-stone/30">{"..."}</span>
+                    <span className="text-stone/50">{"</span>"}</span>{"\n"}
+                    <span className="text-stone/50">    {"</div>"}</span>{"\n"}
+                    <span className="text-stone/50">  {"</div>"}</span>{"\n"}
+                    <span className="text-stone/50">  {"<div>"}</span>
+                    <span className="text-stone/30"> {"/* 矩形 12 */"}</span>{"\n"}
+                    <span className="text-stone/50">    {"<div>"}</span>
+                    <span className="text-stone/30"> {"/* Frame 99 */"}</span>{"\n"}
+                    <span className="text-stone/50">{"</div>"}</span>
                   </code>
                 )}
               </pre>
@@ -253,24 +253,23 @@ export function LayerSection() {
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
         >
-          <h3 className="text-[14px] text-gray-400 uppercase tracking-wider mb-6" style={{ fontWeight: 600 }}>
+          <h3 className="text-[14px] text-stone uppercase tracking-wider mb-6 font-sans" style={{ fontWeight: 600 }}>
             命名规范速查
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {namingRules.map((rule) => (
               <div
                 key={rule.category}
-                className="bg-white border border-gray-200/60 rounded-2xl p-5"
+                className="bg-washi-cream border border-border rounded-md p-5"
               >
-                <h4 className="text-[14px] mb-4" style={{ fontWeight: 600 }}>
+                <h4 className="text-[14px] mb-4 text-ink-primary font-serif" style={{ fontWeight: 600 }}>
                   {rule.category}
                 </h4>
                 <div className="space-y-2 mb-4">
                   {rule.good.map((name) => (
                     <div
                       key={name}
-                      className="flex items-center gap-2 text-[12px] text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-lg"
-                      style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                      className="flex items-center gap-2 text-[12px] text-bamboo bg-bamboo/5 px-3 py-1.5 rounded-sm font-mono"
                     >
                       <Check size={12} /> {name}
                     </div>
@@ -280,8 +279,7 @@ export function LayerSection() {
                   {rule.bad.map((name) => (
                     <div
                       key={name}
-                      className="flex items-center gap-2 text-[12px] text-red-500 bg-red-50 px-3 py-1.5 rounded-lg"
-                      style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                      className="flex items-center gap-2 text-[12px] text-vermillion bg-vermillion/5 px-3 py-1.5 rounded-sm font-mono"
                     >
                       <X size={12} /> {name}
                     </div>

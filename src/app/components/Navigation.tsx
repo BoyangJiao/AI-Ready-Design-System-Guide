@@ -61,23 +61,23 @@ export function Navigation() {
       {/* Mobile toggle */}
       <button
         onClick={() => setMobileOpen(!mobileOpen)}
-        className="fixed top-4 left-4 z-50 lg:hidden bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-2.5 shadow-lg"
+        className="fixed top-4 left-4 z-50 lg:hidden bg-washi-warm/95 border border-border rounded-md p-2.5 shadow-sm"
       >
-        {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+        {mobileOpen ? <X size={20} className="text-ink-primary" /> : <Menu size={20} className="text-ink-primary" />}
       </button>
 
       {/* Desktop sidebar */}
-      <nav className="hidden lg:flex fixed left-0 top-0 h-screen w-64 bg-white/80 backdrop-blur-xl border-r border-gray-200/60 flex-col z-40">
-        <div className="p-6 border-b border-gray-100">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center">
-              <Sparkles size={16} className="text-white" />
+      <nav className="hidden lg:flex fixed left-0 top-0 h-screen w-64 bg-washi-warm/90 border-r border-border flex-col z-40">
+        <div className="p-6 border-b border-border">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-md bg-indigo flex items-center justify-center">
+              <Sparkles size={16} className="text-washi-cream" />
             </div>
-            <span className="text-[15px] tracking-tight" style={{ fontWeight: 600 }}>
+            <span className="text-[15px] tracking-tight font-serif text-ink-primary" style={{ fontWeight: 600 }}>
               AI-Ready DS
             </span>
           </div>
-          <p className="text-[12px] text-gray-500 mt-2">
+          <p className="text-[12px] text-ink-muted mt-2 font-sans">
             设计系统教学指南
           </p>
         </div>
@@ -86,25 +86,25 @@ export function Navigation() {
             <button
               key={id}
               onClick={() => scrollTo(id)}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] mb-1 transition-all duration-200 text-left ${
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-[13px] mb-1 transition-all duration-200 text-left font-sans ${
                 active === id
-                  ? "bg-violet-50 text-violet-700"
-                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  ? "bg-indigo/10 text-indigo"
+                  : "text-ink-muted hover:bg-washi-cream hover:text-ink-primary"
               }`}
               style={{ fontWeight: active === id ? 500 : 400 }}
             >
-              <Icon size={16} className={active === id ? "text-violet-500" : "text-gray-400"} />
+              <Icon size={16} className={active === id ? "text-indigo" : "text-stone"} />
               {label}
               {active === id && (
-                <ChevronRight size={14} className="ml-auto text-violet-400" />
+                <ChevronRight size={14} className="ml-auto text-indigo/60" />
               )}
             </button>
           ))}
         </div>
-        <div className="p-4 border-t border-gray-100">
-          <div className="text-[11px] text-gray-400 text-center">2026 · AI-Ready Design System Handbook</div>
-          <div className="text-[10px] text-gray-300 text-center mt-1">
-            © Boyang Jiao All Rights Reserved
+        <div className="p-4 border-t border-border">
+          <div className="text-[11px] text-ink-muted text-center font-sans">2026 · AI-Ready Design System Handbook</div>
+          <div className="text-[10px] text-stone/60 text-center mt-1 font-sans">
+            &copy; Boyang Jiao All Rights Reserved
           </div>
         </div>
       </nav>
@@ -117,7 +117,7 @@ export function Navigation() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 lg:hidden"
+              className="fixed inset-0 bg-ink-primary/20 z-40 lg:hidden"
               onClick={() => setMobileOpen(false)}
             />
             <motion.nav
@@ -125,19 +125,19 @@ export function Navigation() {
               animate={{ x: 0 }}
               exit={{ x: -280 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="fixed left-0 top-0 h-screen w-72 bg-white shadow-2xl z-50 lg:hidden flex flex-col"
+              className="fixed left-0 top-0 h-screen w-72 bg-washi-warm shadow-lg z-50 lg:hidden flex flex-col"
             >
-              <div className="p-6 border-b border-gray-100 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center">
-                    <Sparkles size={16} className="text-white" />
+              <div className="p-6 border-b border-border flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-md bg-indigo flex items-center justify-center">
+                    <Sparkles size={16} className="text-washi-cream" />
                   </div>
-                  <span className="text-[15px] tracking-tight" style={{ fontWeight: 600 }}>
+                  <span className="text-[15px] tracking-tight font-serif text-ink-primary" style={{ fontWeight: 600 }}>
                     AI-Ready DS
                   </span>
                 </div>
                 <button onClick={() => setMobileOpen(false)}>
-                  <X size={20} className="text-gray-400" />
+                  <X size={20} className="text-ink-muted" />
                 </button>
               </div>
               <div className="flex-1 overflow-y-auto py-4 px-3">
@@ -145,14 +145,14 @@ export function Navigation() {
                   <button
                     key={id}
                     onClick={() => scrollTo(id)}
-                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] mb-1 transition-all duration-200 text-left ${
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-[13px] mb-1 transition-all duration-200 text-left font-sans ${
                       active === id
-                        ? "bg-violet-50 text-violet-700"
-                        : "text-gray-600 hover:bg-gray-50"
+                        ? "bg-indigo/10 text-indigo"
+                        : "text-ink-muted hover:bg-washi-cream"
                     }`}
                     style={{ fontWeight: active === id ? 500 : 400 }}
                   >
-                    <Icon size={16} className={active === id ? "text-violet-500" : "text-gray-400"} />
+                    <Icon size={16} className={active === id ? "text-indigo" : "text-stone"} />
                     {label}
                   </button>
                 ))}

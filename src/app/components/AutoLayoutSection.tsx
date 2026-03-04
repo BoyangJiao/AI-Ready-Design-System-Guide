@@ -12,7 +12,7 @@ const layoutExamples = [
     paddingX: 16,
     paddingY: 10,
     children: [
-      { text: "🛒", sizing: "hug" },
+      { text: "Cart", sizing: "hug" },
       { text: "Add to Cart", sizing: "hug" },
     ],
   },
@@ -68,14 +68,14 @@ export function AutoLayoutSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-100 text-indigo-700 text-[12px] mb-4" style={{ fontWeight: 500 }}>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-ochre/10 text-ochre text-[12px] mb-4 font-sans" style={{ fontWeight: 500 }}>
             <Maximize2 size={13} />
             Auto Layout
           </div>
-          <h2 className="text-3xl sm:text-4xl tracking-tight mb-3" style={{ fontWeight: 700, lineHeight: 1.2 }}>
+          <h2 className="text-3xl sm:text-4xl tracking-tight mb-3 text-ink-primary font-serif" style={{ fontWeight: 700, lineHeight: 1.2 }}>
             Auto Layout = AI 的布局指令
           </h2>
-          <p className="text-gray-500 text-[15px] max-w-2xl mb-12" style={{ lineHeight: 1.7 }}>
+          <p className="text-ink-muted text-[15px] max-w-2xl mb-12 font-sans" style={{ lineHeight: 1.8 }}>
             Auto Layout 是向 AI 传达布局意图的最强工具。它的每一项设置都直接对应 CSS 属性，是实现响应式设计的关键。
           </p>
         </motion.div>
@@ -88,7 +88,7 @@ export function AutoLayoutSection() {
           transition={{ delay: 0.15 }}
           className="mb-16"
         >
-          <h3 className="text-[14px] text-gray-400 uppercase tracking-wider mb-6" style={{ fontWeight: 600 }}>
+          <h3 className="text-[14px] text-stone uppercase tracking-wider mb-6 font-sans" style={{ fontWeight: 600 }}>
             Figma → CSS 属性映射
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -100,25 +100,22 @@ export function AutoLayoutSection() {
             ].map((item) => (
               <div
                 key={item.css}
-                className="bg-white border border-gray-200/60 rounded-xl p-4 hover:border-indigo-200 transition-colors"
+                className="bg-washi-warm border border-border rounded-md p-4 hover:border-ochre/30 transition-colors"
               >
-                <item.icon size={18} className="text-indigo-400 mb-3" />
-                <div className="text-[11px] text-gray-400 mb-1" style={{ fontWeight: 500 }}>
+                <item.icon size={18} className="text-ochre mb-3" />
+                <div className="text-[11px] text-stone mb-1 font-sans" style={{ fontWeight: 500 }}>
                   FIGMA
                 </div>
-                <div className="text-[13px] mb-3" style={{ fontWeight: 600 }}>
+                <div className="text-[13px] mb-3 text-ink-primary font-sans" style={{ fontWeight: 600 }}>
                   {item.figma}
                 </div>
                 <div className="flex items-center gap-1 mb-2">
-                  <ArrowDown size={12} className="text-indigo-300" />
+                  <ArrowDown size={12} className="text-ochre/40" />
                 </div>
-                <div className="text-[11px] text-indigo-500 mb-1" style={{ fontWeight: 500 }}>
+                <div className="text-[11px] text-ochre mb-1 font-sans" style={{ fontWeight: 500 }}>
                   CSS
                 </div>
-                <div
-                  className="text-[12px] text-indigo-700 bg-indigo-50 px-2 py-1 rounded"
-                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                >
+                <div className="text-[12px] text-ochre bg-ochre/5 px-2 py-1 rounded-sm font-mono">
                   {item.desc}
                 </div>
               </div>
@@ -134,7 +131,7 @@ export function AutoLayoutSection() {
           transition={{ delay: 0.25 }}
           className="mb-16"
         >
-          <h3 className="text-[14px] text-gray-400 uppercase tracking-wider mb-6" style={{ fontWeight: 600 }}>
+          <h3 className="text-[14px] text-stone uppercase tracking-wider mb-6 font-sans" style={{ fontWeight: 600 }}>
             交互式示例
           </h3>
 
@@ -143,10 +140,10 @@ export function AutoLayoutSection() {
               <button
                 key={ex.id}
                 onClick={() => setActiveExample(i)}
-                className={`px-4 py-2 rounded-lg text-[13px] transition-all ${
+                className={`px-4 py-2 rounded-md text-[13px] transition-all font-sans ${
                   activeExample === i
-                    ? "bg-indigo-100 text-indigo-700"
-                    : "bg-gray-100 text-gray-500 hover:bg-gray-150"
+                    ? "bg-ochre/10 text-ochre"
+                    : "bg-secondary text-ink-muted hover:bg-muted"
                 }`}
                 style={{ fontWeight: activeExample === i ? 500 : 400 }}
               >
@@ -157,12 +154,12 @@ export function AutoLayoutSection() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Visual */}
-            <div className="bg-white border border-indigo-200/60 rounded-2xl p-6">
-              <div className="text-[12px] text-gray-400 mb-4" style={{ fontWeight: 500 }}>
+            <div className="bg-washi-warm border border-ochre/20 rounded-md p-6">
+              <div className="text-[12px] text-stone mb-4 font-sans" style={{ fontWeight: 500 }}>
                 {example.desc}
               </div>
               <div
-                className={`border-2 border-dashed border-indigo-200 rounded-xl p-4 flex ${
+                className={`border-2 border-dashed border-ochre/30 rounded-md p-4 flex ${
                   example.direction === "vertical" ? "flex-col" : "flex-row"
                 } ${(example as any).spaceBetween ? "justify-between" : ""} items-center`}
                 style={{
@@ -176,71 +173,67 @@ export function AutoLayoutSection() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: i * 0.1 }}
-                    className={`bg-indigo-100 text-indigo-700 rounded-lg px-4 py-2.5 text-[13px] text-center ${
+                    className={`bg-ochre/10 text-ochre rounded-md px-4 py-2.5 text-[13px] text-center font-sans ${
                       child.sizing === "fill" ? "flex-1 w-full" : ""
                     }`}
                     style={{ fontWeight: 500 }}
                   >
                     {child.text}
-                    <div className="text-[10px] text-indigo-400 mt-0.5">
-                      {child.sizing === "fill" ? "Fill ↔" : "Hug ⊡"}
+                    <div className="text-[10px] text-ochre/60 mt-0.5">
+                      {child.sizing === "fill" ? "Fill" : "Hug"}
                     </div>
                   </motion.div>
                 ))}
               </div>
-              {/* Annotations */}
               <div className="mt-4 flex flex-wrap gap-3">
-                <span className="text-[11px] bg-gray-100 text-gray-500 px-2 py-1 rounded" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                <span className="text-[11px] bg-secondary text-ink-muted px-2 py-1 rounded-sm font-mono">
                   gap: {example.gap}px
                 </span>
-                <span className="text-[11px] bg-gray-100 text-gray-500 px-2 py-1 rounded" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                <span className="text-[11px] bg-secondary text-ink-muted px-2 py-1 rounded-sm font-mono">
                   padding: {example.paddingY}px {example.paddingX}px
                 </span>
-                <span className="text-[11px] bg-gray-100 text-gray-500 px-2 py-1 rounded" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                <span className="text-[11px] bg-secondary text-ink-muted px-2 py-1 rounded-sm font-mono">
                   direction: {example.direction}
                 </span>
               </div>
             </div>
 
             {/* Code output */}
-            <div className="bg-gray-900 rounded-2xl p-5">
+            <div className="bg-ink-primary rounded-md p-5">
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-3 h-3 rounded-full bg-red-400" />
-                <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                <div className="w-3 h-3 rounded-full bg-green-400" />
-                <span className="ml-2 text-[11px] text-gray-500">CSS Output</span>
+                <div className="w-3 h-3 rounded-full bg-vermillion/60" />
+                <div className="w-3 h-3 rounded-full bg-ochre/60" />
+                <div className="w-3 h-3 rounded-full bg-bamboo/60" />
+                <span className="ml-2 text-[11px] text-stone/60 font-sans">CSS Output</span>
               </div>
-              <pre
-                className="text-[12px]"
-                style={{ fontFamily: "'JetBrains Mono', monospace", lineHeight: 1.8 }}
-              >
+              <pre className="text-[12px] font-mono" style={{ lineHeight: 1.8 }}>
                 <code>
-                  <span className="text-blue-300">{"display"}</span>
-                  <span className="text-gray-500">{": "}</span>
-                  <span className="text-amber-300">{"flex"}</span>
-                  <span className="text-gray-500">{";"}</span>{"\n"}
-                  <span className="text-blue-300">{"flex-direction"}</span>
-                  <span className="text-gray-500">{": "}</span>
-                  <span className="text-amber-300">{example.direction === "vertical" ? "column" : "row"}</span>
-                  <span className="text-gray-500">{";"}</span>{"\n"}
-                  <span className="text-blue-300">{"gap"}</span>
-                  <span className="text-gray-500">{": "}</span>
-                  <span className="text-emerald-300">{`${example.gap}px`}</span>
-                  <span className="text-gray-500">{";"}</span>{"\n"}
-                  <span className="text-blue-300">{"padding"}</span>
-                  <span className="text-gray-500">{": "}</span>
-                  <span className="text-emerald-300">{`${example.paddingY}px ${example.paddingX}px`}</span>
-                  <span className="text-gray-500">{";"}</span>{"\n"}
-                  <span className="text-blue-300">{"align-items"}</span>
-                  <span className="text-gray-500">{": "}</span>
-                  <span className="text-amber-300">{"center"}</span>
-                  <span className="text-gray-500">{";"}</span>{"\n"}
+                  <span className="text-indigo-light">{"display"}</span>
+                  <span className="text-stone/50">{": "}</span>
+                  <span className="text-ochre-light">{"flex"}</span>
+                  <span className="text-stone/50">{";"}</span>{"\n"}
+                  <span className="text-indigo-light">{"flex-direction"}</span>
+                  <span className="text-stone/50">{": "}</span>
+                  <span className="text-ochre-light">{example.direction === "vertical" ? "column" : "row"}</span>
+                  <span className="text-stone/50">{";"}</span>{"\n"}
+                  <span className="text-indigo-light">{"gap"}</span>
+                  <span className="text-stone/50">{": "}</span>
+                  <span className="text-bamboo-light">{`${example.gap}px`}</span>
+                  <span className="text-stone/50">{";"}</span>{"\n"}
+                  <span className="text-indigo-light">{"padding"}</span>
+                  <span className="text-stone/50">{": "}</span>
+                  <span className="text-bamboo-light">{`${example.paddingY}px ${example.paddingX}px`}</span>
+                  <span className="text-stone/50">{";"}</span>{"\n"}
+                  <span className="text-indigo-light">{"align-items"}</span>
+                  <span className="text-stone/50">{": "}</span>
+                  <span className="text-ochre-light">{"center"}</span>
+                  <span className="text-stone/50">{";"}</span>{"\n"}
                   {(example as any).spaceBetween && (
                     <>
-                      <span className="text-blue-300">{"justify-content"}</span>
-                      <span className="text-gray-500">{": "}</span>
-                      <span className="text-amber-300">{"space-between"}</span>
-                      <span className="text-gray-500">{";"}</span>{"\n"}
+                      <span className="text-indigo-light">{"justify-content"}</span>
+                      <span className="text-stone/50">{": "}</span>
+                      <span className="text-ochre-light">{"space-between"}</span>
+                      <span className="text-stone/50">{";"}</span>{"\n"}
                     </>
                   )}
                 </code>
@@ -249,7 +242,7 @@ export function AutoLayoutSection() {
           </div>
         </motion.div>
 
-        {/* ─── Auto Layout vs No Auto Layout resize comparison ─── */}
+        {/* Resize comparison */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -257,10 +250,10 @@ export function AutoLayoutSection() {
           transition={{ delay: 0.28 }}
           className="mb-16"
         >
-          <h3 className="text-[14px] text-gray-400 uppercase tracking-wider mb-2" style={{ fontWeight: 600 }}>
+          <h3 className="text-[14px] text-stone uppercase tracking-wider mb-2 font-sans" style={{ fontWeight: 600 }}>
             窗口缩放对比
           </h3>
-          <p className="text-[13px] text-gray-400 mb-8">
+          <p className="text-[13px] text-stone mb-8 font-sans">
             同一个卡片组件，在浏览器窗口尺寸变化时，有 Auto Layout 和没有 Auto Layout 的代码表现截然不同
           </p>
 
@@ -269,10 +262,10 @@ export function AutoLayoutSection() {
               <button
                 key={r.label}
                 onClick={() => setResponsiveIndex(i)}
-                className={`px-4 py-2 rounded-lg text-[13px] transition-all ${
+                className={`px-4 py-2 rounded-md text-[13px] transition-all font-sans ${
                   responsiveIndex === i
-                    ? "bg-indigo-100 text-indigo-700"
-                    : "bg-gray-100 text-gray-500"
+                    ? "bg-ochre/10 text-ochre"
+                    : "bg-secondary text-ink-muted"
                 }`}
                 style={{ fontWeight: responsiveIndex === i ? 500 : 400 }}
               >
@@ -282,24 +275,23 @@ export function AutoLayoutSection() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* ── No Auto Layout ── */}
-            <div className="bg-white border border-red-200/60 rounded-2xl p-5">
+            {/* No Auto Layout */}
+            <div className="bg-washi-warm border border-vermillion/20 rounded-md p-5">
               <div className="flex items-center gap-2 mb-4">
-                <X size={14} className="text-red-500" />
-                <span className="text-[13px] text-red-600" style={{ fontWeight: 600 }}>
+                <X size={14} className="text-vermillion" />
+                <span className="text-[13px] text-vermillion font-sans" style={{ fontWeight: 600 }}>
                   无 Auto Layout（position: absolute）
                 </span>
               </div>
-              <div className="bg-gray-50 rounded-xl p-4 flex justify-center overflow-hidden" style={{ minHeight: "200px" }}>
+              <div className="bg-washi-cream rounded-md p-4 flex justify-center overflow-hidden" style={{ minHeight: "200px" }}>
                 <motion.div
                   animate={{ width: responsiveDemo[responsiveIndex].width }}
                   transition={{ type: "spring", stiffness: 200, damping: 25 }}
-                  className="border-2 border-dashed border-red-200 rounded-xl relative"
+                  className="border-2 border-dashed border-vermillion/30 rounded-md relative"
                   style={{ minHeight: "180px" }}
                 >
-                  {/* Fixed position elements - they break on resize */}
                   <div
-                    className="bg-indigo-100 rounded-lg text-[11px] text-indigo-600 flex items-center justify-center"
+                    className="bg-indigo/10 rounded-md text-[11px] text-indigo flex items-center justify-center font-sans"
                     style={{
                       fontWeight: 500,
                       position: "absolute",
@@ -312,7 +304,7 @@ export function AutoLayoutSection() {
                     Header
                   </div>
                   <div
-                    className="bg-violet-100 rounded-lg text-[10px] text-violet-600 flex items-center justify-center"
+                    className="bg-ochre/10 rounded-md text-[10px] text-ochre flex items-center justify-center font-sans"
                     style={{
                       fontWeight: 500,
                       position: "absolute",
@@ -325,7 +317,7 @@ export function AutoLayoutSection() {
                     Sidebar
                   </div>
                   <div
-                    className="bg-emerald-100 rounded-lg text-[10px] text-emerald-600 flex items-center justify-center overflow-hidden"
+                    className="bg-bamboo/10 rounded-md text-[10px] text-bamboo flex items-center justify-center overflow-hidden font-sans"
                     style={{
                       fontWeight: 500,
                       position: "absolute",
@@ -338,7 +330,7 @@ export function AutoLayoutSection() {
                     Content (fixed 180px)
                   </div>
                   <div
-                    className="bg-gray-200 rounded-lg text-[10px] text-gray-500 flex items-center justify-center"
+                    className="bg-stone/10 rounded-md text-[10px] text-stone flex items-center justify-center font-sans"
                     style={{
                       fontWeight: 500,
                       position: "absolute",
@@ -353,42 +345,42 @@ export function AutoLayoutSection() {
                 </motion.div>
               </div>
               <div className="mt-3 flex flex-wrap gap-2">
-                <span className="text-[10px] bg-red-50 text-red-500 px-2 py-1 rounded" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                <span className="text-[10px] bg-vermillion/5 text-vermillion px-2 py-1 rounded-sm font-mono">
                   position: absolute
                 </span>
-                <span className="text-[10px] bg-red-50 text-red-500 px-2 py-1 rounded" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                <span className="text-[10px] bg-vermillion/5 text-vermillion px-2 py-1 rounded-sm font-mono">
                   width: 180px (固定)
                 </span>
               </div>
-              <p className="text-[11px] text-red-400 mt-3" style={{ lineHeight: 1.5 }}>
+              <p className="text-[11px] text-vermillion/70 mt-3 font-sans" style={{ lineHeight: 1.5 }}>
                 {responsiveIndex === 0 
                   ? "桌面端看起来勉强正常，但内容区固定宽度已经有隐患" 
                   : responsiveIndex === 1 
-                  ? "⚠️ Content 溢出容器右侧，Footer 超出边界"
-                  : "💥 布局完全崩溃——Content 和 Footer 溢出不可见，Sidebar 占满整个宽度"}
+                  ? "Content 溢出容器右侧，Footer 超出边界"
+                  : "布局完全崩溃——Content 和 Footer 溢出不可见，Sidebar 占满整个宽度"}
               </p>
             </div>
 
-            {/* ── With Auto Layout ── */}
-            <div className="bg-white border border-emerald-200/60 rounded-2xl p-5">
+            {/* With Auto Layout */}
+            <div className="bg-washi-warm border border-bamboo/20 rounded-md p-5">
               <div className="flex items-center gap-2 mb-4">
-                <Check size={14} className="text-emerald-500" />
-                <span className="text-[13px] text-emerald-600" style={{ fontWeight: 600 }}>
+                <Check size={14} className="text-bamboo" />
+                <span className="text-[13px] text-bamboo font-sans" style={{ fontWeight: 600 }}>
                   使用 Auto Layout（Flexbox）
                 </span>
               </div>
-              <div className="bg-gray-50 rounded-xl p-4 flex justify-center" style={{ minHeight: "200px" }}>
+              <div className="bg-washi-cream rounded-md p-4 flex justify-center" style={{ minHeight: "200px" }}>
                 <motion.div
                   animate={{ width: responsiveDemo[responsiveIndex].width }}
                   transition={{ type: "spring", stiffness: 200, damping: 25 }}
-                  className="border-2 border-dashed border-emerald-200 rounded-xl p-3 flex flex-col gap-2"
+                  className="border-2 border-dashed border-bamboo/30 rounded-md p-3 flex flex-col gap-2"
                 >
-                  <div className="bg-indigo-100 rounded-lg px-3 py-2 text-[11px] text-indigo-600 text-center" style={{ fontWeight: 500 }}>
-                    Header <span className="text-indigo-400">(Fill ↔)</span>
+                  <div className="bg-indigo/10 rounded-md px-3 py-2 text-[11px] text-indigo text-center font-sans" style={{ fontWeight: 500 }}>
+                    Header <span className="text-indigo/60">(Fill)</span>
                   </div>
                   <div className={`flex gap-2 ${responsiveIndex === 2 ? "flex-col" : "flex-row"}`}>
                     <div
-                      className={`bg-violet-100 rounded-lg px-3 py-6 text-[10px] text-violet-600 text-center ${
+                      className={`bg-ochre/10 rounded-md px-3 py-6 text-[10px] text-ochre text-center font-sans ${
                         responsiveIndex === 2 ? "" : "shrink-0"
                       }`}
                       style={{
@@ -397,40 +389,37 @@ export function AutoLayoutSection() {
                       }}
                     >
                       Sidebar
-                      <span className="text-violet-400 block">
+                      <span className="text-ochre/60 block">
                         {responsiveIndex === 2 ? "(Fill)" : "(Fixed 90px)"}
                       </span>
                     </div>
-                    <div className="bg-emerald-100 rounded-lg px-3 py-6 text-[10px] text-emerald-600 text-center flex-1" style={{ fontWeight: 500 }}>
-                      Content <span className="text-emerald-400">(Fill ↔)</span>
+                    <div className="bg-bamboo/10 rounded-md px-3 py-6 text-[10px] text-bamboo text-center flex-1 font-sans" style={{ fontWeight: 500 }}>
+                      Content <span className="text-bamboo/60">(Fill)</span>
                     </div>
                   </div>
-                  <div className="bg-gray-200 rounded-lg px-3 py-2 text-[10px] text-gray-500 text-center" style={{ fontWeight: 500 }}>
-                    Footer <span className="text-gray-400">(Fill ↔)</span>
+                  <div className="bg-stone/10 rounded-md px-3 py-2 text-[10px] text-stone text-center font-sans" style={{ fontWeight: 500 }}>
+                    Footer <span className="text-stone/60">(Fill)</span>
                   </div>
                 </motion.div>
               </div>
               <div className="mt-3 flex flex-wrap gap-2">
-                <span className="text-[10px] bg-emerald-50 text-emerald-500 px-2 py-1 rounded" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                <span className="text-[10px] bg-bamboo/5 text-bamboo px-2 py-1 rounded-sm font-mono">
                   display: flex
                 </span>
-                <span className="text-[10px] bg-emerald-50 text-emerald-500 px-2 py-1 rounded" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                <span className="text-[10px] bg-bamboo/5 text-bamboo px-2 py-1 rounded-sm font-mono">
                   flex: 1 (自适应)
                 </span>
               </div>
-              <p className="text-[11px] text-emerald-500 mt-3" style={{ lineHeight: 1.5 }}>
+              <p className="text-[11px] text-bamboo/70 mt-3 font-sans" style={{ lineHeight: 1.5 }}>
                 {responsiveIndex === 0 
-                  ? "✅ 所有元素按 Flex 规则自动排列，Content 自适应剩余空间" 
+                  ? "所有元素按 Flex 规则自动排列，Content 自适应剩余空间" 
                   : responsiveIndex === 1 
-                  ? "✅ 完美适配——Content 自动收缩，Sidebar 保持固定宽度"
-                  : "✅ 自动切换为垂直布局，Sidebar 变为全宽，内容依然完整"}
+                  ? "完美适配——Content 自动收缩，Sidebar 保持固定宽度"
+                  : "自动切换为垂直布局，Sidebar 变为全宽，内容依然完整"}
               </p>
             </div>
           </div>
         </motion.div>
-
-        {/* Fill vs Fixed Responsive demo */}
-        
       </div>
     </section>
   );

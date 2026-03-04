@@ -13,7 +13,7 @@ import { BestPracticesSection } from "./components/BestPracticesSection";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-white" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
+    <div className="min-h-screen bg-background font-sans washi-texture">
       <Navigation />
       <main className="lg:ml-64">
         <HeroSection />

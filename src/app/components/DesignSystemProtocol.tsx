@@ -19,7 +19,7 @@ import {
   HelpCircle,
 } from "lucide-react";
 
-/* ─── 三大支柱数据 ─── */
+/* --- 三大支柱数据 --- */
 const pillars = [
   {
     id: "semantic",
@@ -32,7 +32,7 @@ const pillars = [
       "每个图层、组件都有语义化命名（Button-Primary, Card-Header），而非 Frame 123。AI 通过名字理解设计意图。",
     without: "Frame 1 → <div>、矩形 5 → <div>，AI 只看到一堆无意义的嵌套盒子",
     withDS: "Button-Primary → <Button variant='primary'>，AI 直接匹配组件库",
-    color: "violet",
+    color: "indigo",
   },
   {
     id: "layout",
@@ -45,7 +45,7 @@ const pillars = [
       "Auto Layout 定义了元素间的空间关系——方向、间距、对齐、填充。这些直接转化为 CSS Flexbox 属性。",
     without: "元素靠手动拖拽定位 → position: absolute; left: 127px; top: 344px",
     withDS: "Auto Layout 约束 → display: flex; gap: 16px; padding: 20px",
-    color: "indigo",
+    color: "ochre",
   },
   {
     id: "tokens",
@@ -58,7 +58,7 @@ const pillars = [
       "Design Tokens 将颜色、字体、间距抽象为语义化变量。就像 Pantone 色卡统一了全球的色彩语言。",
     without: "硬编码 #6D28D9 → AI 不知道这是品牌主色还是随机紫色",
     withDS: "var(--color-primary) → AI 理解这是主色，自动适配深色模式",
-    color: "amber",
+    color: "bamboo",
   },
   {
     id: "components",
@@ -71,11 +71,19 @@ const pillars = [
       "AI-Ready 的设计系统天然是组件化的。关键在于组件的属性封装——Figma 中的 Variant、Boolean、String、Instance 四种属性类型，精确映射为 React 组件的 Props API。",
     without: "每个按钮都是独立的矩形+文字 → AI 为每个按钮重新编写样式",
     withDS: "Button 组件 (variant + disabled + label + icon) → AI 直接映射为类型安全的 React Props",
-    color: "emerald",
+    color: "stone",
   },
 ];
 
-/* ─── 成熟度评估数据 ─── */
+/* Color mapping for pillars */
+const pillarColorMap: Record<string, { bg: string; border: string; text: string; light: string; badge: string }> = {
+  indigo: { bg: "bg-indigo/5", border: "border-indigo/20", text: "text-indigo", light: "text-indigo-light", badge: "bg-indigo/10" },
+  ochre: { bg: "bg-ochre/5", border: "border-ochre/20", text: "text-ochre", light: "text-ochre-light", badge: "bg-ochre/10" },
+  bamboo: { bg: "bg-bamboo/5", border: "border-bamboo/20", text: "text-bamboo", light: "text-bamboo-light", badge: "bg-bamboo/10" },
+  stone: { bg: "bg-stone/5", border: "border-stone/20", text: "text-stone", light: "text-stone", badge: "bg-stone/10" },
+};
+
+/* --- 成熟度评估数据 --- */
 const maturityItems = [
   {
     category: "语义化结构",
@@ -111,13 +119,13 @@ const maturityItems = [
   },
 ];
 
-/* ─── 成熟度等级 ─── */
+/* --- 成熟度等级 --- */
 function getMaturityLevel(score: number, total: number) {
   const pct = score / total;
-  if (pct >= 0.9) return { label: "AI-Ready", emoji: "🎼", color: "emerald", desc: "你的设计系统已经是一份精美的交响乐总谱——AI 可以精准演奏" };
-  if (pct >= 0.65) return { label: "进阶中", emoji: "🎵", color: "blue", desc: "你的乐谱基本成形，但部分段落还需要补充标注" };
-  if (pct >= 0.35) return { label: "起步中", emoji: "🎶", color: "amber", desc: "你有了一些旋律片段，但还缺少完整的编排和记谱" };
-  return { label: "待启动", emoji: "🔇", color: "red", desc: "你的设计还是\"口头哼唱\"——AI 只能靠猜来演奏" };
+  if (pct >= 0.9) return { label: "AI-Ready", color: "bamboo", desc: "你的设计系统已经是一份精美的交响乐总谱——AI 可以精准演奏" };
+  if (pct >= 0.65) return { label: "进阶中", color: "indigo", desc: "你的乐谱基本成形，但部分段落还需要补充标注" };
+  if (pct >= 0.35) return { label: "起步中", color: "ochre", desc: "你有了一些旋律片段，但还缺少完整的编排和记谱" };
+  return { label: "待启动", color: "vermillion", desc: "你的设计还是\"口头哼唱\"——AI 只能靠猜来演奏" };
 }
 
 export function DesignSystemProtocol() {
@@ -136,46 +144,46 @@ export function DesignSystemProtocol() {
   };
 
   return (
-    <section id="protocol" className="py-24 px-6 bg-white overflow-hidden">
+    <section id="protocol" className="py-24 px-6 bg-background overflow-hidden">
       <div className="max-w-4xl mx-auto">
-        {/* ───────── Header ───────── */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
           <div
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-100 text-violet-700 text-[12px] mb-4"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-indigo/10 text-indigo text-[12px] mb-4 font-sans"
             style={{ fontWeight: 500 }}
           >
             <Music size={13} />
             设计系统即协议
           </div>
           <h2
-            className="text-3xl sm:text-4xl tracking-tight mb-3"
+            className="text-3xl sm:text-4xl tracking-tight mb-3 text-ink-primary font-serif"
             style={{ fontWeight: 700, lineHeight: 1.2 }}
           >
             AI-Ready 设计系统 = 一份精确的乐谱
           </h2>
           <p
-            className="text-gray-500 text-[15px] max-w-2xl mb-6"
-            style={{ lineHeight: 1.7 }}
+            className="text-ink-muted text-[15px] max-w-2xl mb-6 font-sans"
+            style={{ lineHeight: 1.8 }}
           >
             在一个交响乐团中，作曲家通过乐谱将音乐意图传达给每一位演奏家。
             乐谱不是音乐本身，但它是让音乐被精确、一致地演绎的唯一途径。
           </p>
           <p
-            className="text-gray-500 text-[15px] max-w-2xl mb-16"
-            style={{ lineHeight: 1.7 }}
+            className="text-ink-muted text-[15px] max-w-2xl mb-16 font-sans"
+            style={{ lineHeight: 1.8 }}
           >
-            <span style={{ fontWeight: 600 }} className="text-gray-700">
+            <span style={{ fontWeight: 600 }} className="text-ink-primary">
               AI-Ready 的设计系统就是你的「乐谱」
             </span>
             ——它将你的设计意图结构化、符号化、标准化，让 AI 这位"演奏家"能够精准还原每一个设计决策，而不是靠猜来即兴演奏。
           </p>
         </motion.div>
 
-        {/* ───────── Metaphor visual ───────── */}
+        {/* Metaphor visual */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -183,9 +191,9 @@ export function DesignSystemProtocol() {
           transition={{ delay: 0.1 }}
           className="mb-20"
         >
-          <div className="bg-gradient-to-br from-violet-50 via-indigo-50/50 to-purple-50 border border-violet-200/40 rounded-3xl p-6 sm:p-10">
+          <div className="bg-washi-warm border border-border rounded-md p-6 sm:p-10">
             <h3
-              className="text-[14px] text-gray-400 uppercase tracking-wider mb-8"
+              className="text-[14px] text-stone uppercase tracking-wider mb-8 font-sans"
               style={{ fontWeight: 600 }}
             >
               核心类比
@@ -193,51 +201,50 @@ export function DesignSystemProtocol() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
               {/* Composer */}
               <div className="text-center">
-                <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center shadow-lg mb-4">
-                  <Figma size={28} className="text-white" />
+                <div className="w-16 h-16 mx-auto rounded-md bg-ochre flex items-center justify-center shadow-sm mb-4">
+                  <Figma size={28} className="text-washi-cream" />
                 </div>
-                <div className="text-[16px] mb-1" style={{ fontWeight: 600 }}>
+                <div className="text-[16px] mb-1 text-ink-primary font-serif" style={{ fontWeight: 600 }}>
                   设计师
                 </div>
-                <div className="text-[13px] text-gray-500">= 作曲家</div>
-                <p className="text-[12px] text-gray-400 mt-2" style={{ lineHeight: 1.6 }}>
+                <div className="text-[13px] text-ink-muted font-sans">= 作曲家</div>
+                <p className="text-[12px] text-stone mt-2 font-sans" style={{ lineHeight: 1.6 }}>
                   创造设计意图、视觉语言和交互逻辑
                 </p>
               </div>
 
               {/* Score = DS */}
               <div className="text-center relative">
-                {/* Connecting arrows on desktop */}
-                <div className="hidden sm:block absolute top-8 -left-3 text-violet-300">
+                <div className="hidden sm:block absolute top-8 -left-3 text-stone/40">
                   <ArrowRight size={20} />
                 </div>
-                <div className="hidden sm:block absolute top-8 -right-3 text-violet-300">
+                <div className="hidden sm:block absolute top-8 -right-3 text-stone/40">
                   <ArrowRight size={20} />
                 </div>
-                <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-violet-200 mb-4 ring-4 ring-violet-100">
-                  <Music size={28} className="text-white" />
+                <div className="w-16 h-16 mx-auto rounded-md bg-indigo flex items-center justify-center shadow-sm mb-4 ring-4 ring-indigo/10">
+                  <Music size={28} className="text-washi-cream" />
                 </div>
-                <div className="text-[16px] mb-1" style={{ fontWeight: 600 }}>
+                <div className="text-[16px] mb-1 text-ink-primary font-serif" style={{ fontWeight: 600 }}>
                   AI-Ready 设计系统
                 </div>
-                <div className="text-[13px] text-violet-500" style={{ fontWeight: 500 }}>
+                <div className="text-[13px] text-indigo font-sans" style={{ fontWeight: 500 }}>
                   = 乐谱（唯一桥梁）
                 </div>
-                <p className="text-[12px] text-gray-400 mt-2" style={{ lineHeight: 1.6 }}>
+                <p className="text-[12px] text-stone mt-2 font-sans" style={{ lineHeight: 1.6 }}>
                   将设计意图编码为结构化、可解析的"符号体系"
                 </p>
               </div>
 
               {/* Performer = AI */}
               <div className="text-center">
-                <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center shadow-lg mb-4">
-                  <Cpu size={28} className="text-white" />
+                <div className="w-16 h-16 mx-auto rounded-md bg-bamboo flex items-center justify-center shadow-sm mb-4">
+                  <Cpu size={28} className="text-washi-cream" />
                 </div>
-                <div className="text-[16px] mb-1" style={{ fontWeight: 600 }}>
+                <div className="text-[16px] mb-1 text-ink-primary font-serif" style={{ fontWeight: 600 }}>
                   AI 工具
                 </div>
-                <div className="text-[13px] text-gray-500">= 演奏家</div>
-                <p className="text-[12px] text-gray-400 mt-2" style={{ lineHeight: 1.6 }}>
+                <div className="text-[13px] text-ink-muted font-sans">= 演奏家</div>
+                <p className="text-[12px] text-stone mt-2 font-sans" style={{ lineHeight: 1.6 }}>
                   根据"乐谱"精准生成符合设计意图的代码
                 </p>
               </div>
@@ -245,36 +252,34 @@ export function DesignSystemProtocol() {
 
             {/* Without vs With */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
-              <div className="bg-white/80 border border-red-200/50 rounded-2xl p-5">
+              <div className="bg-washi-cream border border-vermillion/20 rounded-md p-5">
                 <div className="flex items-center gap-2 mb-3">
-                  <X size={14} className="text-red-500" />
-                  <span className="text-[13px] text-red-600" style={{ fontWeight: 600 }}>
+                  <X size={14} className="text-vermillion" />
+                  <span className="text-[13px] text-vermillion font-sans" style={{ fontWeight: 600 }}>
                     没有乐谱
                   </span>
                 </div>
-                <p className="text-[13px] text-gray-500" style={{ lineHeight: 1.7 }}>
+                <p className="text-[13px] text-ink-muted font-sans" style={{ lineHeight: 1.8 }}>
                   演奏家只能凭"听"来猜旋律。节奏可能跑偏，和弦可能错误，每次演奏都不一样。
                 </p>
                 <div
-                  className="mt-3 text-[12px] text-red-500/70 bg-red-50 rounded-lg px-3 py-2"
-                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                  className="mt-3 text-[12px] text-vermillion/70 bg-vermillion/5 rounded-sm px-3 py-2 font-mono"
                 >
                   AI 看到的：一堆像素坐标和十六进制色值
                 </div>
               </div>
-              <div className="bg-white/80 border border-emerald-200/50 rounded-2xl p-5">
+              <div className="bg-washi-cream border border-bamboo/20 rounded-md p-5">
                 <div className="flex items-center gap-2 mb-3">
-                  <Check size={14} className="text-emerald-500" />
-                  <span className="text-[13px] text-emerald-600" style={{ fontWeight: 600 }}>
+                  <Check size={14} className="text-bamboo" />
+                  <span className="text-[13px] text-bamboo font-sans" style={{ fontWeight: 600 }}>
                     有精确的乐谱
                   </span>
                 </div>
-                <p className="text-[13px] text-gray-500" style={{ lineHeight: 1.7 }}>
+                <p className="text-[13px] text-ink-muted font-sans" style={{ lineHeight: 1.8 }}>
                   每个音符、节拍、力度都被精确标注。任何演奏家都能忠实还原作曲家的创作意图。
                 </p>
                 <div
-                  className="mt-3 text-[12px] text-emerald-500/70 bg-emerald-50 rounded-lg px-3 py-2"
-                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                  className="mt-3 text-[12px] text-bamboo/70 bg-bamboo/5 rounded-sm px-3 py-2 font-mono"
                 >
                   AI 看到的：语义化组件 + Token 体系 + 布局约束
                 </div>
@@ -283,7 +288,7 @@ export function DesignSystemProtocol() {
           </div>
         </motion.div>
 
-        {/* ───────── 四大支柱 ───────── */}
+        {/* 四大支柱 */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -292,12 +297,12 @@ export function DesignSystemProtocol() {
           className="mb-20"
         >
           <h3
-            className="text-[14px] text-gray-400 uppercase tracking-wider mb-2"
+            className="text-[14px] text-stone uppercase tracking-wider mb-2 font-sans"
             style={{ fontWeight: 600 }}
           >
             乐谱的四大组成部分
           </h3>
-          <p className="text-[13px] text-gray-400 mb-8">
+          <p className="text-[13px] text-stone mb-8 font-sans">
             一份完整的 AI-Ready "乐谱"由四个核心元素组成，缺一不可
           </p>
 
@@ -305,14 +310,15 @@ export function DesignSystemProtocol() {
           <div className="flex flex-wrap gap-2 mb-6">
             {pillars.map((p, i) => {
               const Icon = p.icon;
+              const c = pillarColorMap[p.color];
               return (
                 <button
                   key={p.id}
                   onClick={() => setActivePillar(i)}
-                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-[13px] transition-all border ${
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-md text-[13px] transition-all border font-sans ${
                     activePillar === i
-                      ? `bg-${p.color}-50 text-${p.color}-700 border-${p.color}-200`
-                      : "bg-gray-50 text-gray-500 border-transparent hover:bg-gray-100"
+                      ? `${c.badge} ${c.text} ${c.border}`
+                      : "bg-secondary text-ink-muted border-transparent hover:bg-muted"
                   }`}
                   style={{ fontWeight: activePillar === i ? 600 : 400 }}
                 >
@@ -333,74 +339,62 @@ export function DesignSystemProtocol() {
             >
               {(() => {
                 const p = pillars[activePillar];
-                const colorMap: Record<string, { bg: string; border: string; text: string; light: string; badge: string }> = {
-                  violet: { bg: "bg-violet-50", border: "border-violet-200", text: "text-violet-700", light: "text-violet-500", badge: "bg-violet-100" },
-                  indigo: { bg: "bg-indigo-50", border: "border-indigo-200", text: "text-indigo-700", light: "text-indigo-500", badge: "bg-indigo-100" },
-                  amber: { bg: "bg-amber-50", border: "border-amber-200", text: "text-amber-700", light: "text-amber-500", badge: "bg-amber-100" },
-                  emerald: { bg: "bg-emerald-50", border: "border-emerald-200", text: "text-emerald-700", light: "text-emerald-500", badge: "bg-emerald-100" },
-                };
-                const c = colorMap[p.color];
+                const c = pillarColorMap[p.color];
 
                 return (
-                  <div className={`${c.bg}/60 ${c.border} border rounded-2xl p-6 sm:p-8`}>
+                  <div className={`${c.bg} ${c.border} border rounded-md p-6 sm:p-8`}>
                     {/* Header */}
                     <div className="flex flex-col sm:flex-row sm:items-start gap-4 mb-6">
-                      <div className={`w-12 h-12 rounded-xl ${c.badge} flex items-center justify-center shrink-0`}>
+                      <div className={`w-12 h-12 rounded-md ${c.badge} flex items-center justify-center shrink-0`}>
                         <p.icon size={22} className={c.light} />
                       </div>
                       <div>
-                        <h4 className="text-[18px] mb-1" style={{ fontWeight: 700 }}>
+                        <h4 className="text-[18px] mb-1 text-ink-primary font-serif" style={{ fontWeight: 700 }}>
                           {p.title}
-                          <span className="text-[13px] text-gray-400 ml-2" style={{ fontWeight: 400 }}>
+                          <span className="text-[13px] text-stone ml-2 font-sans" style={{ fontWeight: 400 }}>
                             {p.subtitle}
                           </span>
                         </h4>
-                        <p className="text-[14px] text-gray-500" style={{ lineHeight: 1.7 }}>
+                        <p className="text-[14px] text-ink-muted font-sans" style={{ lineHeight: 1.8 }}>
                           {p.designDesc}
                         </p>
                       </div>
                     </div>
 
                     {/* Metaphor callout */}
-                    <div className={`${c.badge}/60 ${c.border} border rounded-xl px-5 py-4 mb-6`}>
+                    <div className={`${c.badge} ${c.border} border rounded-md px-5 py-4 mb-6`}>
                       <div className="flex items-center gap-2 mb-2">
                         <Music size={14} className={c.light} />
-                        <span className={`text-[12px] ${c.text}`} style={{ fontWeight: 600 }}>
+                        <span className={`text-[12px] ${c.text} font-sans`} style={{ fontWeight: 600 }}>
                           乐谱类比：{p.metaphor}
                         </span>
                       </div>
-                      <p className="text-[13px] text-gray-600" style={{ lineHeight: 1.6 }}>
+                      <p className="text-[13px] text-ink-muted font-sans" style={{ lineHeight: 1.6 }}>
                         {p.metaphorDesc}
                       </p>
                     </div>
 
                     {/* Without vs With */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="bg-white border border-red-100 rounded-xl p-4">
+                      <div className="bg-washi-warm border border-vermillion/15 rounded-md p-4">
                         <div className="flex items-center gap-2 mb-2">
-                          <X size={13} className="text-red-400" />
-                          <span className="text-[12px] text-red-500" style={{ fontWeight: 600 }}>
+                          <X size={13} className="text-vermillion" />
+                          <span className="text-[12px] text-vermillion font-sans" style={{ fontWeight: 600 }}>
                             缺失时
                           </span>
                         </div>
-                        <p
-                          className="text-[12px] text-gray-500"
-                          style={{ lineHeight: 1.7, fontFamily: "'JetBrains Mono', monospace" }}
-                        >
+                        <p className="text-[12px] text-ink-muted font-mono" style={{ lineHeight: 1.7 }}>
                           {p.without}
                         </p>
                       </div>
-                      <div className="bg-white border border-emerald-100 rounded-xl p-4">
+                      <div className="bg-washi-warm border border-bamboo/15 rounded-md p-4">
                         <div className="flex items-center gap-2 mb-2">
-                          <Check size={13} className="text-emerald-400" />
-                          <span className="text-[12px] text-emerald-500" style={{ fontWeight: 600 }}>
+                          <Check size={13} className="text-bamboo" />
+                          <span className="text-[12px] text-bamboo font-sans" style={{ fontWeight: 600 }}>
                             具备时
                           </span>
                         </div>
-                        <p
-                          className="text-[12px] text-gray-500"
-                          style={{ lineHeight: 1.7, fontFamily: "'JetBrains Mono', monospace" }}
-                        >
+                        <p className="text-[12px] text-ink-muted font-mono" style={{ lineHeight: 1.7 }}>
                           {p.withDS}
                         </p>
                       </div>
@@ -412,7 +406,7 @@ export function DesignSystemProtocol() {
           </AnimatePresence>
         </motion.div>
 
-        {/* ───────── Bridge Visualization ───────── */}
+        {/* Bridge Visualization */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -421,22 +415,22 @@ export function DesignSystemProtocol() {
           className="mb-20"
         >
           <h3
-            className="text-[14px] text-gray-400 uppercase tracking-wider mb-2"
+            className="text-[14px] text-stone uppercase tracking-wider mb-2 font-sans"
             style={{ fontWeight: 600 }}
           >
             全景视图
           </h3>
-          <p className="text-[13px] text-gray-400 mb-8">
+          <p className="text-[13px] text-stone mb-8 font-sans">
             AI-Ready 设计系统是连接设计意图和高保真代码之间的唯一桥梁
           </p>
 
-          <div className="bg-gray-900 rounded-2xl p-6 sm:p-8 overflow-x-auto">
+          <div className="bg-ink-primary rounded-md p-6 sm:p-8 overflow-x-auto">
             <div className="flex items-stretch gap-3 min-w-[680px]">
               {/* Figma side */}
-              <div className="flex-1 bg-gradient-to-b from-pink-500/20 to-pink-500/5 border border-pink-500/20 rounded-xl p-4 flex flex-col">
+              <div className="flex-1 bg-ochre/15 border border-ochre/20 rounded-md p-4 flex flex-col">
                 <div className="flex items-center gap-2 mb-3">
-                  <Figma size={16} className="text-pink-400" />
-                  <span className="text-[12px] text-pink-300" style={{ fontWeight: 600 }}>
+                  <Figma size={16} className="text-ochre-light" />
+                  <span className="text-[12px] text-ochre-light font-sans" style={{ fontWeight: 600 }}>
                     设计端
                   </span>
                 </div>
@@ -444,7 +438,7 @@ export function DesignSystemProtocol() {
                   {["设计意图", "视觉语言", "交互逻辑", "品牌调性"].map((item) => (
                     <div
                       key={item}
-                      className="text-[11px] text-pink-200/70 bg-pink-500/10 rounded px-2.5 py-1.5"
+                      className="text-[11px] text-ochre-light/70 bg-ochre/10 rounded-sm px-2.5 py-1.5 font-sans"
                     >
                       {item}
                     </div>
@@ -454,17 +448,17 @@ export function DesignSystemProtocol() {
 
               {/* Arrow */}
               <div className="flex items-center">
-                <ArrowRight size={18} className="text-gray-600" />
+                <ArrowRight size={18} className="text-stone/40" />
               </div>
 
               {/* Design System Bridge */}
-              <div className="flex-[1.4] bg-gradient-to-b from-violet-500/25 to-indigo-500/10 border-2 border-violet-500/30 rounded-xl p-4 flex flex-col relative">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-violet-500 text-white text-[10px] px-3 py-1 rounded-full" style={{ fontWeight: 600 }}>
+              <div className="flex-[1.4] bg-indigo/15 border-2 border-indigo/25 rounded-md p-4 flex flex-col relative">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-indigo text-washi-cream text-[10px] px-3 py-1 rounded-md font-sans" style={{ fontWeight: 600 }}>
                   THE BRIDGE
                 </div>
                 <div className="flex items-center gap-2 mb-3 mt-1">
-                  <Music size={16} className="text-violet-400" />
-                  <span className="text-[12px] text-violet-300" style={{ fontWeight: 600 }}>
+                  <Music size={16} className="text-indigo-light" />
+                  <span className="text-[12px] text-indigo-light font-sans" style={{ fontWeight: 600 }}>
                     AI-Ready 设计系统
                   </span>
                 </div>
@@ -472,9 +466,9 @@ export function DesignSystemProtocol() {
                   {pillars.map((p) => (
                     <div
                       key={p.id}
-                      className="text-[10px] text-violet-200/80 bg-violet-500/10 rounded px-2 py-1.5 flex items-center gap-1.5"
+                      className="text-[10px] text-indigo-light/80 bg-indigo/10 rounded-sm px-2 py-1.5 flex items-center gap-1.5 font-sans"
                     >
-                      <p.icon size={10} className="text-violet-400 shrink-0" />
+                      <p.icon size={10} className="text-indigo-light shrink-0" />
                       {p.title}
                     </div>
                   ))}
@@ -483,14 +477,14 @@ export function DesignSystemProtocol() {
 
               {/* Arrow */}
               <div className="flex items-center">
-                <ArrowRight size={18} className="text-gray-600" />
+                <ArrowRight size={18} className="text-stone/40" />
               </div>
 
               {/* AI side */}
-              <div className="flex-1 bg-gradient-to-b from-emerald-500/20 to-emerald-500/5 border border-emerald-500/20 rounded-xl p-4 flex flex-col">
+              <div className="flex-1 bg-bamboo/15 border border-bamboo/20 rounded-md p-4 flex flex-col">
                 <div className="flex items-center gap-2 mb-3">
-                  <Code size={16} className="text-emerald-400" />
-                  <span className="text-[12px] text-emerald-300" style={{ fontWeight: 600 }}>
+                  <Code size={16} className="text-bamboo-light" />
+                  <span className="text-[12px] text-bamboo-light font-sans" style={{ fontWeight: 600 }}>
                     代码端
                   </span>
                 </div>
@@ -498,7 +492,7 @@ export function DesignSystemProtocol() {
                   {["语义化 HTML", "Token 驱动样式", "响应式布局", "组件化代码"].map((item) => (
                     <div
                       key={item}
-                      className="text-[11px] text-emerald-200/70 bg-emerald-500/10 rounded px-2.5 py-1.5"
+                      className="text-[11px] text-bamboo-light/70 bg-bamboo/10 rounded-sm px-2.5 py-1.5 font-sans"
                     >
                       {item}
                     </div>
@@ -508,14 +502,14 @@ export function DesignSystemProtocol() {
             </div>
 
             <div className="mt-6 text-center">
-              <p className="text-[12px] text-gray-500" style={{ lineHeight: 1.6 }}>
+              <p className="text-[12px] text-stone/60 font-sans" style={{ lineHeight: 1.6 }}>
                 没有中间这座"桥"，AI 只能看到像素和坐标，而不是你的设计意图
               </p>
             </div>
           </div>
         </motion.div>
 
-        {/* ───────── AI-Ready 成熟度评估 ───────── */}
+        {/* AI-Ready 成熟度评估 */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -523,54 +517,54 @@ export function DesignSystemProtocol() {
           transition={{ delay: 0.25 }}
         >
           <h3
-            className="text-[14px] text-gray-400 uppercase tracking-wider mb-2"
+            className="text-[14px] text-stone uppercase tracking-wider mb-2 font-sans"
             style={{ fontWeight: 600 }}
           >
             AI-Ready 成熟度自评
           </h3>
-          <p className="text-[13px] text-gray-400 mb-8">
+          <p className="text-[13px] text-stone mb-8 font-sans">
             勾选你的设计系统已经具备的能力，看看你的"乐谱"完成度
           </p>
 
           {/* Score display */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
             <div className="flex items-center gap-4 flex-1 w-full">
-              <div className="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden">
+              <div className="flex-1 h-3 bg-secondary rounded-full overflow-hidden">
                 <motion.div
                   className={`h-full rounded-full ${
                     pct >= 90
-                      ? "bg-gradient-to-r from-emerald-400 to-emerald-500"
+                      ? "bg-bamboo"
                       : pct >= 65
-                      ? "bg-gradient-to-r from-blue-400 to-blue-500"
+                      ? "bg-indigo"
                       : pct >= 35
-                      ? "bg-gradient-to-r from-amber-400 to-amber-500"
-                      : "bg-gradient-to-r from-red-400 to-red-500"
+                      ? "bg-ochre"
+                      : "bg-vermillion"
                   }`}
                   animate={{ width: `${pct}%` }}
                   transition={{ type: "spring", stiffness: 200 }}
                 />
               </div>
-              <span className="text-[14px] text-gray-700 shrink-0" style={{ fontWeight: 600 }}>
+              <span className="text-[14px] text-ink-primary shrink-0 font-serif" style={{ fontWeight: 600 }}>
                 {pct}%
               </span>
             </div>
             <div
-              className={`px-4 py-2 rounded-xl text-[13px] ${
+              className={`px-4 py-2 rounded-md text-[13px] font-sans ${
                 pct >= 90
-                  ? "bg-emerald-100 text-emerald-700"
+                  ? "bg-bamboo/10 text-bamboo"
                   : pct >= 65
-                  ? "bg-blue-100 text-blue-700"
+                  ? "bg-indigo/10 text-indigo"
                   : pct >= 35
-                  ? "bg-amber-100 text-amber-700"
-                  : "bg-red-100 text-red-700"
+                  ? "bg-ochre/10 text-ochre"
+                  : "bg-vermillion/10 text-vermillion"
               }`}
               style={{ fontWeight: 600 }}
             >
-              {maturity.emoji} {maturity.label}
+              {maturity.label}
             </div>
           </div>
 
-          <p className="text-[13px] text-gray-500 mb-6" style={{ lineHeight: 1.6 }}>
+          <p className="text-[13px] text-ink-muted mb-6 font-sans" style={{ lineHeight: 1.6 }}>
             {maturity.desc}
           </p>
 
@@ -579,9 +573,9 @@ export function DesignSystemProtocol() {
             {maturityItems.map((cat) => (
               <div
                 key={cat.category}
-                className="bg-white border border-gray-200/60 rounded-2xl p-5"
+                className="bg-washi-warm border border-border rounded-md p-5"
               >
-                <h4 className="text-[14px] mb-4" style={{ fontWeight: 600 }}>
+                <h4 className="text-[14px] mb-4 text-ink-primary font-serif" style={{ fontWeight: 600 }}>
                   {cat.category}
                 </h4>
                 <div className="space-y-2">
@@ -592,20 +586,20 @@ export function DesignSystemProtocol() {
                       <button
                         key={key}
                         onClick={() => toggleItem(key)}
-                        className="w-full flex items-start gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 transition-colors text-left"
+                        className="w-full flex items-start gap-3 px-3 py-2.5 rounded-md hover:bg-washi-cream transition-colors text-left"
                       >
                         <div
-                          className={`w-5 h-5 rounded-md flex items-center justify-center transition-all mt-0.5 shrink-0 ${
+                          className={`w-5 h-5 rounded-sm flex items-center justify-center transition-all mt-0.5 shrink-0 ${
                             checked
-                              ? "bg-violet-500 text-white"
-                              : "border-2 border-gray-300"
+                              ? "bg-indigo text-washi-cream"
+                              : "border-2 border-stone/40"
                           }`}
                         >
                           {checked && <Check size={12} />}
                         </div>
                         <span
-                          className={`text-[13px] transition-all ${
-                            checked ? "text-gray-400 line-through" : "text-gray-700"
+                          className={`text-[13px] transition-all font-sans ${
+                            checked ? "text-stone line-through" : "text-ink-secondary"
                           }`}
                           style={{ lineHeight: 1.5 }}
                         >
