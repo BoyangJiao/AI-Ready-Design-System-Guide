@@ -11,6 +11,8 @@ import {
   X,
   Rocket,
   Music,
+  ArrowRightLeft,
+  ExternalLink,
 } from "lucide-react";
 
 const sections = [
@@ -18,13 +20,15 @@ const sections = [
   { id: "mindset", label: "核心理念", icon: BookOpen },
   { id: "protocol", label: "设计系统即协议", icon: Music },
   { id: "comparison", label: "交互式对比", icon: Sparkles },
+  { id: "levels", label: "AI-Ready 层级", icon: Layers },
   { id: "layers", label: "图层与结构", icon: Layers },
   { id: "autolayout", label: "Auto Layout", icon: Workflow },
   { id: "components", label: "组件与变体", icon: Layers },
   { id: "tokens", label: "Design Tokens", icon: Sparkles },
-  { id: "skills", label: "Skills & MCP", icon: Rocket },
+  { id: "skills", label: "Knowledge Base & MCP", icon: Rocket },
   { id: "workflow", label: "工作流实战", icon: Workflow },
   { id: "bestpractices", label: "最佳实践", icon: Trophy },
+  { id: "agentic", label: "Agentic 演进", icon: ExternalLink }
 ];
 
 export function Navigation() {
@@ -32,33 +36,46 @@ export function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "-100px 0px -60% 0px" }
-    );
-
     const handleScroll = () => {
-      // If at bottom of page, always focus bestpractices
+      // 1. Check if at bottom -> Agentic
       if (window.innerHeight + Math.ceil(window.scrollY) >= document.documentElement.scrollHeight - 50) {
-        setActive("bestpractices");
+        setActive("agentic");
+        return;
+      }
+
+      // 2. Find the active section based on the top 30% of the viewport
+      const targetY = window.innerHeight * 0.3;
+      let currentActive = "";
+      let minDistance = Infinity;
+
+      for (const { id } of sections) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        
+        // If the section spans across the target Y line, it's definitively active
+        if (rect.top <= targetY && rect.bottom >= targetY) {
+          currentActive = id;
+          break;
+        }
+        
+        // Fallback: finding the closest top edge to the target Y line
+        const distance = Math.abs(rect.top - targetY);
+        if (distance < minDistance) {
+          minDistance = distance;
+          currentActive = id;
+        }
+      }
+
+      if (currentActive) {
+        setActive(prev => currentActive !== prev ? currentActive : prev);
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-
-    sections.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Initial check
 
     return () => {
-      observer.disconnect();
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);

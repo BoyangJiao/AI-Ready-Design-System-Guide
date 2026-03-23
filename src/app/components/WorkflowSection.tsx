@@ -30,7 +30,7 @@ const workflowSteps = [
   },
   {
     step: 2,
-    title: "编写 Skills 文件",
+    title: "构建 Knowledge Base 与 Skills",
     icon: Code,
     color: "amber",
     tasks: [
@@ -41,7 +41,7 @@ const workflowSteps = [
       "列出可用的组件库和工具链",
       "编写常见模式的最佳实践",
     ],
-    tips: "Skills 文件放在项目根目录的 /skills 文件夹中，AI 工具会自动读取。",
+    tips: "Knowledge Base (What) 与 Skills (How) 文件夹协同工作，AI 工具会自动读取。",
   },
   {
     step: 3,
@@ -66,12 +66,12 @@ const workflowSteps = [
     tasks: [
       "选择目标组件或页面",
       "通过 MCP 将设计数据传递给 AI",
-      "AI 结合 Skills 文件生成代码",
+      "AI 结合 Knowledge Base 与 Skills 生成代码",
       "审查生成的代码质量",
       "迭代优化不满意的部分",
       "集成到项目代码库中",
     ],
-    tips: "初次使用时先从小组件开始，逐步扩大到复杂页面，持续优化 Skills 文件。",
+    tips: "初次使用时先从小组件开始，逐步扩大到复杂页面，持续优化 Knowledge Base 与 Skills。",
   },
 ];
 

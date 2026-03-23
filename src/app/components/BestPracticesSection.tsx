@@ -14,10 +14,10 @@ const companies = [
   {
     name: "Vercel / v0",
     product: "v0 Design Systems",
-    desc: "v0 内置 Design System Skills，根据用户描述生成符合设计规范的 React + Tailwind 代码。",
+    desc: "v0 内置 Design System Knowledge Base 与 Skills，根据用户描述生成符合设计规范的 React + Tailwind 代码。",
     practices: [
       "内置 shadcn/ui 组件库作为默认 Design System",
-      "Skills 文件定义了严格的 Tailwind CSS 使用规范",
+      "Knowledge Base 与 Skills 定义了严格的 Tailwind CSS 使用规范",
       "支持自定义 Design Tokens 覆盖默认样式",
       "AI 自动处理响应式断点和暗色模式",
     ],
@@ -31,7 +31,7 @@ const companies = [
     product: "Polaris Design System",
     desc: "Polaris 拥有完整的 Token 体系、严格的组件规范和丰富的文档，是 AI 生成生产级代码的标杆。",
     practices: [
-      "Polaris 组件有完整的 Skills 文档供 AI 参考",
+      "Polaris 组件有完整的 Knowledge Base 与 Skills 文档供 AI 参考",
       "Design Tokens 通过 Style Dictionary 管理和同步",
       "AI 生成代码自动应用 Polaris 的无障碍标准 (WCAG)",
       "多主题支持通过 Token 层实现设计一致性",
@@ -86,8 +86,8 @@ const keyTakeaways = [
   },
   {
     number: "03",
-    title: "Skills 即规范",
-    desc: "Skills 文件是 AI 的行为准则，定义了组件如何使用、代码如何组织、样式如何应用。",
+    title: "Knowledge Base 与 Skills 即规范",
+    desc: "Knowledge Base (What) 与 Skills (How) 是 AI 的行为准则，定义了组件如何使用、代码如何组织、样式如何应用。",
   },
   {
     number: "04",
@@ -240,10 +240,10 @@ export function BestPracticesSection() {
             交付一份"会说话"的设计稿
           </h3>
           <p className="text-[14px] text-gray-500 max-w-xl mx-auto mb-8" style={{ lineHeight: 1.7 }}>
-            通过语义化命名、Auto Layout、Design Tokens 和 Skills 文件，让你的设计稿成为 AI 能够精确理解和高保真还原的开发蓝图。
+            通过语义化命名、Auto Layout、Design Tokens 和 Knowledge Base 与 Skills，让你的设计稿成为 AI 能够精确理解和高保真还原的开发蓝图。
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            {["语义化命名", "Auto Layout", "Design Tokens", "组件变体", "Skills 文件", "MCP 协议"].map(
+            {["语义化命名", "Auto Layout", "Design Tokens", "组件变体", "Knowledge Base 与 Skills", "MCP 协议"].map(
               (tag) => (
                 <span
                   key={tag}

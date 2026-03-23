@@ -17,39 +17,37 @@ import {
 const skillCategories = [
   {
     id: "what",
-    label: "什么是 Skills",
+    label: "Knowledge Base 与 Skills",
     icon: Lightbulb,
     content: {
-      title: "Skills：AI 的设计系统「说明书」",
-      desc: "Skills 是一种结构化的指令文档（通常是 .md 或 .json 文件），它告诉 AI 编程工具如何正确使用你的设计系统。可以理解为你为 AI 编写的「组件使用手册」。",
+      title: "Knowledge Base 与 Skills：AI 的设计系统「说明书」",
+      desc: "Knowledge Base 是设计系统的本体，负责定义「What」；而 Skills 是执行的工作流，解决「How」。它们相互配合指导 AI 编程工具正确使用规范。",
       points: [
-        "定义组件的使用规范、属性和约束条件",
-        "包含代码模板和最佳实践示例",
-        "指导 AI 生成符合设计系统规范的代码",
-        "避免 AI「创造性发挥」导致的样式不一致",
+        "Knowledge Base (What): 包含设计系统的全集定义规范 (如 tokens, layout)",
+        "Skills (How): 定义具体组件如何渲染与工作流约束",
+        "指导 AI 生成符合全局设计系统规范的高保真代码",
+        "避免 AI「创造性发挥」导致的样式与逻辑不一致",
       ],
-      example: `# Button Component Skill
+      example: `# Knowledge Base (What)
+/knowledge-base
+  ├── design-tokens.md
+  ├── layout.md
+  ├── component-spec.md
+  └── assets-copy.md
 
+# Button Component Skill (How)
 ## Usage Rules
-- Always use design token colors
-- Never hardcode color values
-- Support variants: primary, secondary, ghost
-- Always include aria-label for icon-only buttons
+- Always use design-tokens.md for colors
+- Never hardcode hex/rgb values
+- Check component-spec.md for variants
 
 ## Code Template
 \`\`\`tsx
-<Button 
-  variant="primary"
-  size="md"
-  onClick={handler}
->
+<Button variant="primary">
   {children}
 </Button>
 \`\`\`
-
-## Constraints
-- Max 3 words for button text
-- Always pair with loading state`,
+`,
     },
   },
   {
@@ -63,7 +61,7 @@ const skillCategories = [
         "自动提取 Figma 的组件结构、Auto Layout 和样式信息",
         "将设计规范转化为 AI 可理解的上下文",
         "支持实时同步设计变更到代码环境",
-        "结合 Skills 文件实现高精度代码生成",
+        "结合 Knowledge Base 与 Skills 实现高精度代码生成",
       ],
       example: `// MCP 数据流示例
 {
@@ -94,33 +92,26 @@ const skillCategories = [
       title: "已验证的设计系统实践",
       desc: "Vercel、Shopify、Coinbase、IBM 等团队已经在生产环境中使用 Skills + MCP 的组合来加速设计到代码的转化。",
       points: [
-        "Vercel v0：内置 Design System Skills，一键生成符合规范的 UI",
-        "Shopify Polaris：通过 Skills 文件确保 AI 遵循 Polaris 设计系统",
+        "Vercel v0：内置体系，一键生成符合设计规范的 UI",
+        "Shopify Polaris：将知识库(What)与技能(How)解耦指导 AI",
         "Coinbase CDS：完整的 Figma 组件库与代码组件精确映射",
         "IBM Carbon：严谨的 Token 层级架构和详尽的组件使用规范",
       ],
-      example: `// Vercel v0 + Skills 工作流
-// 1. 定义 Design System Skills
-// skills/design-system.md
-
-# My Design System
-
-## Color Palette
+      example: `// 生产级工作流
+// 1. 定义 Design System Knowledge Base (What)
+// knowledge-base/design-tokens.md
+# Color Palette
 Use CSS variables from tokens.css
 Never use raw hex/rgb values
 
-## Component Library
+// 2. 编写执行 Skills (How)
+// skills/component-workflow.md
+# Component Rules
 Import from @company/ui
-Available: Button, Card, Input,
-  Modal, Badge, Avatar
-
-## Layout Rules  
-Mobile-first responsive design
-Use CSS Grid for page layouts
-Use Flexbox for component layouts
+Available: Button, Card, Input
 Max content width: 1280px
 
-// 2. AI 自动遵循规范生成代码 ✨`,
+// 3. AI 自动遵循系统生成代码 ✨`,
     },
   },
 ];
@@ -142,8 +133,8 @@ const mcpFlow = [
   },
   {
     step: 3,
-    title: "Skills 文件",
-    desc: "组件规范 + 代码模板",
+    title: "Knowledge Base 与 Skills",
+    desc: "设计系统知识库 + 技能工作流",
     icon: BookOpen,
     color: "from-amber-500 to-orange-500",
   },
@@ -178,13 +169,13 @@ export function SkillsSection() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-100 text-orange-700 text-[12px] mb-4" style={{ fontWeight: 500 }}>
             <Rocket size={13} />
-            Skills & MCP 新范式
+            Knowledge Base & MCP 新范式
           </div>
           <h2 className="text-3xl sm:text-4xl tracking-tight mb-3" style={{ fontWeight: 700, lineHeight: 1.2 }}>
             从「画图」到「编程」的桥梁
           </h2>
           <p className="text-gray-500 text-[15px] max-w-2xl mb-12" style={{ lineHeight: 1.7 }}>
-            2025-2026 年最重要的进展：Skills 文件和 MCP 协议让 AI 不仅能「看到」你的设计，还能「理解」你的设计系统规范。
+            2025-2026 年最重要的进展：Knowledge Base 与 Skills 让 AI 不仅能「看到」你的设计，更能深刻理解「What」和「How」。
           </p>
         </motion.div>
 
@@ -296,7 +287,7 @@ export function SkillsSection() {
                   <div className="w-3 h-3 rounded-full bg-yellow-400" />
                   <div className="w-3 h-3 rounded-full bg-green-400" />
                   <span className="ml-2 text-[11px] text-gray-500">
-                    {activeCategory === "what" ? "skills/button.md" : activeCategory === "mcp" ? "mcp-output.json" : "skills/design-system.md"}
+                    {activeCategory === "what" ? "knowledge-base & skills" : activeCategory === "mcp" ? "mcp-output.json" : "workflow"}
                   </span>
                 </div>
                 <pre
