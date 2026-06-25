@@ -41,8 +41,8 @@ export function AgenticFuture() {
             向 Agentic Design System 演进
           </h2>
           <p className="text-gray-400 text-[16px] sm:text-[18px] max-w-3xl mx-auto" style={{ lineHeight: 1.8 }}>
-            职能边界正在消融。设计系统的终局，是从「被动的静态资产库」跃升为「主动的 AI 工作流引擎」。
-            AI-Ready 是骨架，<span className="text-blue-300 font-semibold">Agentic</span> 才是赋予其自研、自组装与自学习的灵魂。
+            职能边界正在消融。设计系统的终局，是跃升为「主动的 AI 工作流引擎」。
+            <span className="text-blue-300 font-semibold">Agentic</span> 赋予其自研、自组装与自学习的灵魂。
           </p>
         </motion.div>
 
@@ -140,42 +140,72 @@ export function AgenticFuture() {
                 Agentic DS 之所以能带来革命，是因为它适配了未来的 <strong>Agentic Product Development Flow</strong>。
                 <br/><br/>
                 传统的「发现 → 定义 → 开发 → 交付」的线形双钻模型，被压缩成了高度并发的实时循环。
-                在这个新循环中，人类不再做苦力，而是专注于提供系统约束、审核逻辑和注入情感价值。
+                在这个新循环中，人类专注于提供系统约束、审核逻辑和注入情感价值。
               </p>
-              
-              <div className="bg-gray-900/50 rounded-xl p-5 border border-gray-800">
-                <div className="text-[12px] text-gray-500 font-mono mb-2">GUI 的新使命</div>
-                <p className="text-[13px] text-gray-300">
-                  当后端逻辑由 AI 瞬间编排完成，前端 GUI 的核心价值从"功能操作面板"退居为——<strong className="text-white">Human-in-the-loop (人类在环) 的最后一公里。</strong> 提供可视化审核、信任锚点与不可替代的情绪连接。
-                </p>
-              </div>
             </div>
 
             {/* Workflow Visualization */}
             <div className="md:w-[55%] flex flex-col justify-center space-y-3">
               <WorkflowStep 
                 num="01" 
-                title="Automate (自动化生成)" 
-                desc="多 Agent 并发调用设计资产与代码，生成初步的可交互方案。" 
-                color="blue"
-              />
-              <div className="ml-6 w-[2px] h-4 bg-gray-800"></div>
-              
-              <WorkflowStep 
-                num="02" 
-                title="Human Exp. (人类体验层)" 
-                desc="系统将冰冷的代码与逻辑渲染为沉浸式界面，供人类感知与代入。" 
-                color="purple"
-                isActive={true}
+                title="意图与约束输入（Prompt/Spec）" 
+                desc="注入业务上下文意图与产品研发需求，明确目标、边界与设计系统约束，为 Agent 提供可执行的起点。" 
+                color="indigo"
               />
               <div className="ml-6 w-[2px] h-4 bg-gray-800"></div>
 
-              <WorkflowStep 
-                num="03" 
-                title="Review (高阶审查)" 
-                desc="人类审查品牌调性、商业风险与边界条件，提供微调指令。" 
-                color="indigo"
-              />
+              {/* 02 ⇄ 03 多轮迭代循环 */}
+              <div className="relative rounded-2xl border border-dashed border-blue-500/25 bg-blue-500/[0.03] p-3 sm:p-4">
+                <div className="absolute -top-3 left-4 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#0a0f1d] border border-blue-500/30 text-[10px] text-blue-300 font-mono">
+                  <Repeat size={10} className="text-blue-400" />
+                  ITERATE LOOP
+                </div>
+
+                <div className="space-y-3">
+                  <WorkflowStep 
+                    num="02" 
+                    title="Automate (自动化生成)" 
+                    desc="多 Agent 并发调用设计资产与代码，生成初步的可交互方案。" 
+                    color="blue"
+                  />
+
+                  <div className="flex items-center gap-2 pl-4 pr-2">
+                    <div className="flex-1 h-px bg-gradient-to-r from-blue-500/40 via-purple-500/30 to-transparent" />
+                    <div className="flex items-center gap-1 shrink-0 px-2 py-1 rounded-full bg-purple-500/10 border border-purple-500/20">
+                      <ArrowRight size={11} className="text-blue-400" />
+                      <Repeat size={11} className="text-purple-400" />
+                      <ArrowRight size={11} className="text-purple-400 rotate-180" />
+                    </div>
+                    <div className="flex-1 h-px bg-gradient-to-l from-purple-500/40 via-blue-500/30 to-transparent" />
+                  </div>
+                  
+                  <WorkflowStep 
+                    num="03" 
+                    title="人类专家判断与审查" 
+                    desc="人类在沉浸式界面中感知方案，审查品牌调性、商业风险与边界条件，做出专业判断并提供微调指令。" 
+                    color="purple"
+                    isActive={true}
+                  />
+                </div>
+
+                {/* 右侧回环弧线 */}
+                <svg
+                  className="absolute -right-[14px] top-[22%] h-[56%] w-5 text-blue-400/35 pointer-events-none hidden sm:block"
+                  viewBox="0 0 20 100"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M 2 2 C 18 2, 18 48, 18 50 C 18 52, 18 98, 2 98"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeDasharray="4 3"
+                    strokeLinecap="round"
+                  />
+                  <path d="M 0 94 L 4 98 L 0 102" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" transform="translate(0,-4)" />
+                </svg>
+              </div>
+
               <div className="ml-6 w-[2px] h-4 bg-gray-800"></div>
 
               <WorkflowStep 
@@ -200,8 +230,8 @@ export function AgenticFuture() {
               <Trophy className="text-blue-400 mb-6" size={32} />
               <h3 className="text-xl text-gray-400 font-medium mb-4 tracking-widest uppercase text-[12px]">The Ultimate Takeaway</h3>
               <p className="text-2xl md:text-3xl text-white font-bold leading-snug max-w-4xl" style={{ textWrap: "balance" }}>
-                “未来的设计系统不是组件库，而是<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">组织级的产品蓝图 + AI 工作流引擎。</span><br/><br/>
-                目标不是用 AI 取代构建者，而是用 AI 消灭底层重复劳动，把人类的创造力放大到对意图、信任和系统约束的终极掌控上。”
+                “未来的设计系统是<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">组织级的产品蓝图 + AI 工作流引擎。</span><br/><br/>
+                用 AI 消灭底层重复劳动，把人类的创造力放大到对意图、信任和系统约束的终极掌控上。”
               </p>
             </div>
           </div>

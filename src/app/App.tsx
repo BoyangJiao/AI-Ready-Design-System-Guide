@@ -1,38 +1,18 @@
-import { Navigation } from "./components/Navigation";
-import { HeroSection } from "./components/HeroSection";
-import { MindsetSection } from "./components/MindsetSection";
-import { DesignSystemProtocol } from "./components/DesignSystemProtocol";
-import { AIReadyComparison } from "./components/AIReadyComparison";
-import { AIReadyLevels } from "./components/AIReadyLevels";
-import { AgenticFuture } from "./components/AgenticFuture";
-import { LayerSection } from "./components/LayerSection";
-import { AutoLayoutSection } from "./components/AutoLayoutSection";
-import { ComponentsSection } from "./components/ComponentsSection";
-import { TokensSection } from "./components/TokensSection";
-import { SkillsSection } from "./components/SkillsSection";
-import { WorkflowSection } from "./components/WorkflowSection";
-import { BestPracticesSection } from "./components/BestPracticesSection";
+import { HashRouter, Routes, Route } from "react-router";
+import { Part1 } from "./pages/Part1";
+import { Part2 } from "./pages/Part2";
+import { ComponentEncapsulation } from "./pages/ComponentEncapsulation";
 import { Analytics } from "@vercel/analytics/react";
+
 export default function App() {
   return (
-    <div className="min-h-screen bg-white" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
-      <Navigation />
-      <main className="lg:ml-64">
-        <HeroSection />
-        <MindsetSection />
-        <DesignSystemProtocol />
-        <AIReadyComparison />
-        <AIReadyLevels />
-        <LayerSection />
-        <AutoLayoutSection />
-        <ComponentsSection />
-        <TokensSection />
-        <SkillsSection />
-        <WorkflowSection />
-        <BestPracticesSection />
-        <AgenticFuture />
-      </main>
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<Part1 />} />
+        <Route path="/part-2" element={<Part2 />} />
+        <Route path="/component-encapsulation" element={<ComponentEncapsulation />} />
+      </Routes>
       <Analytics />
-    </div>
+    </HashRouter>
   );
 }

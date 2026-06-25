@@ -90,9 +90,9 @@ export function HeroSection() {
           className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto"
         >
           {[
-            { value: "85%+", label: "代码还原度提升" },
-            { value: "3×", label: "开发效率倍增" },
-            { value: "60%", label: "减少沟通成本" },
+            { value: "高保真", label: "代码更贴近设计意图" },
+            { value: "可维护", label: "Token 驱动 · 系统化产出" },
+            { value: "少返工", label: "减少设计-开发的来回沟通" },
           ].map((stat) => (
             <div
               key={stat.label}

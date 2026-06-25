@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Puzzle,
@@ -8,6 +9,7 @@ import {
   ToggleLeft,
   Type,
   Layers,
+  Layers3,
   List,
   ChevronDown,
   Search,
@@ -840,6 +842,23 @@ export function ComponentsSection() {
               </div>
             </div>
           </div>
+
+          {/* ─── 二级页入口:组件封装的三个层次 ─── */}
+          <Link to="/component-encapsulation" className="mt-6 block group">
+            <div className="rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 p-0.5 shadow-lg shadow-violet-200/50 hover:shadow-violet-300/60 transition-all">
+              <div className="bg-white rounded-[14px] p-6 flex items-center gap-5">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center shrink-0">
+                  <Layers3 size={22} className="text-white" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-[16px] text-gray-900" style={{ fontWeight: 700 }}>
+                    组件封装的三个层次
+                  </h4>
+                </div>
+                <ArrowRight size={20} className="text-violet-500 shrink-0 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </div>
+          </Link>
         </motion.div>
       </div>
     </section>
